@@ -55,6 +55,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         ConfirmPassField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -83,6 +88,7 @@ public class ForgotPassword extends javax.swing.JFrame {
             }
         });
 
+        StatusLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         StatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         StatusLabel.setText("Trạng thái");
 
@@ -280,6 +286,18 @@ public class ForgotPassword extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_NewPassFieldKeyPressed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        int asking0 = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn thoát?","Quên mật khẩu",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
+        if (asking0 == JOptionPane.YES_OPTION ) {
+            this.dispose();
+            new LoginForm().setVisible(true);
+            
+        } else if (asking0 == JOptionPane.NO_OPTION){
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formWindowClosing
     private void User_load() {
         NewPassField.setEchoChar('*');
         ConfirmPassField.setEchoChar('*');
@@ -294,7 +312,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 "Thông báo",JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE hashsalt = ? ");
+                ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE Reckey = ? ");
                 ps.setString(1, getrecovery);
                 rs = ps.executeQuery();
                 if (rs.next()) {
@@ -332,7 +350,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         } else {
             try {
                 if (newpass.equals(confirmpass)) { 
-                    ps = con.prepareStatement("UPDATE DANGNHAP SET password = ? WHERE hashsalt = ? ");
+                    ps = con.prepareStatement("UPDATE DANGNHAP SET password = ? WHERE Reckey = ? ");
                     ps.setString(1, newpass);
                     ps.setString(2, getrecovery);
                     ps.executeUpdate();
