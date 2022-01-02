@@ -1,7 +1,0 @@
-USE [QuanLyShopSach]
-EXEC sp_configure 'CLR ENABLED' , '1'
-GO
-RECONFIGURE
-GO
-ALTER DATABASE QuanLyShopSach SET TRUSTWORTHY ON
-GO
