@@ -95,6 +95,7 @@ public class SalerForm extends javax.swing.JFrame {
         DelPackage = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         DateBuy = new org.jdesktop.swingx.JXDatePicker();
+        DeleteBill = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -351,6 +352,14 @@ public class SalerForm extends javax.swing.JFrame {
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("Ngày mua");
 
+        DeleteBill.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        DeleteBill.setText("Xoá đơn");
+        DeleteBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBillActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -445,9 +454,12 @@ public class SalerForm extends javax.swing.JFrame {
                     .addComponent(MaHD, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(DateBuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
-                .addComponent(CreateBill, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Help)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(CreateBill, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Help))
+                    .addComponent(DeleteBill, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(317, 317, 317))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
@@ -472,21 +484,18 @@ public class SalerForm extends javax.swing.JFrame {
                     .addComponent(EmployeeCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(DateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CreateBill)
-                            .addComponent(Help))
-                        .addGap(29, 29, 29)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(CreateBill)
+                    .addComponent(Help))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DeleteBill)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel18)
+                        .addComponent(DateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -667,24 +676,28 @@ public class SalerForm extends javax.swing.JFrame {
         // this will convert any number sequence into 6 character.
         String billcode = String.format("%06d", number);
         ///////////////////////////////////////////
+        String emplcode = EmployeeCode.getText();
         String date = sdf.format(DateBuy.getDate());
         MaHD.setText(billcode);
         
         if(date.equals("")) {
-            JOptionPane.showMessageDialog(null, "Nhập ngày mua",
+            JOptionPane.showMessageDialog(this, "Nhập ngày mua",
                             "Thông báo",JOptionPane.ERROR_MESSAGE);
         }
         else {
             try {
-                ps = con.prepareStatement("INSERT HOADON(MaHD, NgayMua) VALUES (?,?)");
+                ps = con.prepareStatement("INSERT HOADON(MaHD, MaNV, NgayMua) VALUES (?,?,?)");
                 ps.setString(1, billcode);
-                ps.setString(2, date);
+                ps.setString(2, emplcode);
+                ps.setString(3, date);
                 ps.executeUpdate();
                 ClearText();
                 EnableFunction();
                 //Kích hoạt thêm thông tin khách hàng, thêm mặt hàng để thanh toán
 
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Nhập ngày mua",
+                            "Thông báo",JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -692,14 +705,16 @@ public class SalerForm extends javax.swing.JFrame {
 
     private void HelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Luôn bấm nút tạo đơn để thực hiện thanh toán",
+        JOptionPane.showMessageDialog(null, "Luôn bấm nút tạo đơn để thực hiện thanh toán\n"
+                            + "Nếu không hiện mã hoá đơn, chọn ngày mua và thử lại",
                             "Thông báo",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_HelpActionPerformed
     //Thêm khách hàng
     private void AddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCustomerActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String makh, name, tel, level, date;
+        String billcode ,makh, name, tel, level, date;
+        billcode = MaHD.getText();
         //tao ma don hang ngau nhien 6 chu so
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
@@ -716,8 +731,7 @@ public class SalerForm extends javax.swing.JFrame {
                             "Thông báo",JOptionPane.ERROR_MESSAGE);        
         }
         else {
-            try {
-                ps = con.prepareStatement("INSERT KHACHHANG(MaKH, HoTenKH, SDT, ThuHang, NgayLapThe) VALUES (?,?,?,?,?)");
+            try {                
                 ps1 = con.prepareStatement("SELECT MaKH, HoTenKH, SDT, COUNT(SDT) AS VAIL "
                         + "FROM KHACHHANG WHERE SDT = ? GROUP BY SDT");
                 ps1.setString(1, tel);
@@ -729,13 +743,21 @@ public class SalerForm extends javax.swing.JFrame {
                             "Thông báo",JOptionPane.ERROR_MESSAGE);
                     } 
                     else {
+                       //Thêm khách hàng vào hệ thống
+                       ps = con.prepareStatement("INSERT KHACHHANG(MaKH, HoTenKH, SDT, ThuHang, NgayLapThe) VALUES (?,?,?,?,?)");
                        ps.setString(1, makh); 
                        ps.setString(2, name);
                        ps.setString(3, tel);
                        ps.setString(4, level);
                        ps.setString(5, date);
+                       ps.executeUpdate();
                        JOptionPane.showMessageDialog(null, "Thêm thông tin thành công",
                             "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                       //Thêm mã khách hàng vào bảng hoá đơn
+                        ps1 = con.prepareStatement("UPDATE HOADON SET MaKH = ? WHERE MaHD = ? ");
+                        ps1.setString(1, makh);
+                        ps1.setString(2, billcode);
+                        ps1.executeUpdate();
                        
                        MaKH.setText("");
                        TenKH.setText("");
@@ -861,7 +883,7 @@ public class SalerForm extends javax.swing.JFrame {
         String excash = ExcessCash.getText();
         JOptionPane.showMessageDialog(this,"Trả lại khách: " + excash +" VNĐ","Thông tin",JOptionPane.INFORMATION_MESSAGE);
         
-        //tiếp theo sẽ cập nhật vào thông tin số lượng sách còn lại
+        //tiếp theo sẽ cập nhật thành tiền tổng hoá đơn
         try {
             ps = con.prepareStatement("UPDATE HOADON SET ThanhTien = ? WHERE MaHD = ? ");
             ps.setString(1, finalprice);
@@ -899,6 +921,23 @@ public class SalerForm extends javax.swing.JFrame {
             Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_FindCustomerActionPerformed
+    //xoá đơn nếu tạo nhầm do lỗi nhân viên
+    private void DeleteBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBillActionPerformed
+        // TODO add your handling code here:
+        String billcode = MaHD.getText();
+         try {
+            ps = con.prepareStatement("DELETE FROM HOADON WHERE MaHD = ? ");
+            ps.setString(1, billcode);
+            ps.executeUpdate();
+            MaHD.setText("");
+            
+            
+            JOptionPane.showMessageDialog(this,"Đã xoá đơn vừa tạo","Thông tin",JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DeleteBillActionPerformed
     
     public void EnableFunction() {
         //Enable field input
@@ -1056,6 +1095,7 @@ public class SalerForm extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker DateBuy;
     private org.jdesktop.swingx.JXDatePicker DateCreate;
     private javax.swing.JButton DelPackage;
+    private javax.swing.JButton DeleteBill;
     private javax.swing.JLabel EmployeeCode;
     private javax.swing.JLabel EmployeeName;
     private javax.swing.JTextField ExcessCash;
