@@ -74,12 +74,11 @@ public class BillDetail extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         ExcelExport = new javax.swing.JButton();
         SearchField = new javax.swing.JTextField();
-        MaSachSearch = new javax.swing.JRadioButton();
-        TenSachSearch = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         TotalPrice = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
         SoLuong = new javax.swing.JTextField();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -159,12 +158,6 @@ public class BillDetail extends javax.swing.JFrame {
             }
         });
 
-        MaSachSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaSachSearch.setText("Theo mã sách");
-
-        TenSachSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenSachSearch.setText("Theo tên sách");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Thành tiền");
@@ -176,6 +169,9 @@ public class BillDetail extends javax.swing.JFrame {
                 ExitButtonActionPerformed(evt);
             }
         });
+
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã sách", "Tên sách" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,15 +200,7 @@ public class BillDetail extends javax.swing.JFrame {
                                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(MaSachSearch)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TenSachSearch))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -222,11 +210,18 @@ public class BillDetail extends javax.swing.JFrame {
                                         .addGap(229, 229, 229)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(TenSach)
-                                            .addComponent(SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(jLabel7)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(SearchSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TenSach)
+                                    .addComponent(SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(262, 262, 262)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,14 +263,12 @@ public class BillDetail extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TenSachSearch, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(MaSachSearch))
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RefreshButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -368,27 +361,30 @@ public class BillDetail extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String search = SearchField.getText();
         String mahd = MaHD.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaSachSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT CHITIETHOADON.MaSach, THONGTINSACH.TenSach, THONGTINSACH.GiaTri,"
-                    + "CHITIETHOADON.SoLuong, CHITIETHOADON.ThanhTien FROM HOADON, CHITIETHOADON, THONGTINSACH "
-                    + "WHERE CHITIETHOADON.MaHD = HOADON.MaHD AND THONGTINSACH.MaSach = CHITIETHOADON.MaSach AND "
-                    + "HOADON.MaHD = ? AND CHITIETHOADON.MaSach = ?");
-                ps.setString(1,mahd);
-                ps.setString(2,search);
-                rs=ps.executeQuery();
-                BillInformationTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenSachSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT CHITIETHOADON.MaSach, THONGTINSACH.TenSach, THONGTINSACH.GiaTri,"
-                    + "CHITIETHOADON.SoLuong, CHITIETHOADON.ThanhTien FROM HOADON, CHITIETHOADON, THONGTINSACH "
-                    + "WHERE CHITIETHOADON.MaHD = HOADON.MaHD AND THONGTINSACH.MaSach = CHITIETHOADON.MaSach AND "
-                    + "HOADON.MaHD = ? AND THONGTINSACH.TenSach = ?");
-                ps.setString(1,mahd);
-                ps.setString(2,search);
-                rs=ps.executeQuery();
-                BillInformationTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã sách" -> {
+                    ps = con.prepareStatement("SELECT CHITIETHOADON.MaSach, THONGTINSACH.TenSach, THONGTINSACH.GiaTri,"
+                            + "CHITIETHOADON.SoLuong, CHITIETHOADON.ThanhTien FROM HOADON, CHITIETHOADON, THONGTINSACH "
+                            + "WHERE CHITIETHOADON.MaHD = HOADON.MaHD AND THONGTINSACH.MaSach = CHITIETHOADON.MaSach AND "
+                            + "HOADON.MaHD = ? AND CHITIETHOADON.MaSach = ?");
+                    ps.setString(1,mahd);
+                    ps.setString(2,search);
+                    rs=ps.executeQuery();
+                    BillInformationTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên sách" -> {
+                    ps = con.prepareStatement("SELECT CHITIETHOADON.MaSach, THONGTINSACH.TenSach, THONGTINSACH.GiaTri,"
+                            + "CHITIETHOADON.SoLuong, CHITIETHOADON.ThanhTien FROM HOADON, CHITIETHOADON, THONGTINSACH "
+                            + "WHERE CHITIETHOADON.MaHD = HOADON.MaHD AND THONGTINSACH.MaSach = CHITIETHOADON.MaSach AND "
+                            + "HOADON.MaHD = ? AND THONGTINSACH.TenSach = ?");
+                    ps.setString(1,mahd);
+                    ps.setString(2,search);
+                    rs=ps.executeQuery();
+                    BillInformationTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (SQLException ex) {
@@ -405,7 +401,7 @@ public class BillDetail extends javax.swing.JFrame {
         TotalPrice.setText("");
         
         User_load();
-        clearchoose();
+        SearchSelection.setSelectedIndex(0);
     }//GEN-LAST:event_RefreshButtonActionPerformed
     //thao tác trên bảng
     private void BillInformationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BillInformationTableMouseClicked
@@ -456,10 +452,7 @@ public class BillDetail extends javax.swing.JFrame {
                                                                                         
                 
     }
-    public void clearchoose() {
-        MaSachSearch.setSelected(false);
-        TenSachSearch.setSelected(false);
-    }
+    
     
     /**
      * @param args the command line arguments
@@ -521,13 +514,12 @@ public class BillDetail extends javax.swing.JFrame {
     private javax.swing.JButton ExitButton;
     private javax.swing.JTextField MaHD;
     private javax.swing.JTextField MaSach;
-    private javax.swing.JRadioButton MaSachSearch;
     private javax.swing.JTextField Price;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JTextField SoLuong;
     private javax.swing.JTextField TenSach;
-    private javax.swing.JRadioButton TenSachSearch;
     private javax.swing.JTextField TotalPrice;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

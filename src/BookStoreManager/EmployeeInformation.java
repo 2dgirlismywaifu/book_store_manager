@@ -80,17 +80,12 @@ public class EmployeeInformation extends javax.swing.JFrame {
         EditButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
         RefreshButton = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        Search = new javax.swing.JButton();
         ExcelExport = new javax.swing.JButton();
         SearchField = new javax.swing.JTextField();
-        MaNVSearch = new javax.swing.JRadioButton();
-        TenNVSearch = new javax.swing.JRadioButton();
-        TelSearch = new javax.swing.JRadioButton();
         ExitButton = new javax.swing.JButton();
-        EmailSearch = new javax.swing.JRadioButton();
-        JobSearch = new javax.swing.JRadioButton();
-        AddrSearch = new javax.swing.JRadioButton();
         JobName = new javax.swing.JTextField();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -203,11 +198,11 @@ public class EmployeeInformation extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton6.setText("Tìm kiếm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        Search.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Search.setText("Tìm kiếm");
+        Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                SearchActionPerformed(evt);
             }
         });
 
@@ -221,15 +216,6 @@ public class EmployeeInformation extends javax.swing.JFrame {
 
         SearchField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        MaNVSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaNVSearch.setText("Theo mã nhân viên");
-
-        TenNVSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenNVSearch.setText("Theo tên nhân viên");
-
-        TelSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TelSearch.setText("Theo số điện thoại");
-
         ExitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ExitButton.setText("Thoát");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -238,16 +224,10 @@ public class EmployeeInformation extends javax.swing.JFrame {
             }
         });
 
-        EmailSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EmailSearch.setText("Theo email");
-
-        JobSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        JobSearch.setText("Theo chức vụ");
-
-        AddrSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        AddrSearch.setText("Theo địa chỉ");
-
         JobName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã nhân viên", "Tên nhân viên", "Số điện thoại", "Email", "Địa chỉ", "Chức vụ" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -296,22 +276,12 @@ public class EmployeeInformation extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(128, 128, 128)
                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TenNVSearch)
-                    .addComponent(MaNVSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EmailSearch)
-                    .addComponent(TelSearch))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JobSearch)
-                    .addComponent(AddrSearch))
+                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -346,27 +316,12 @@ public class EmployeeInformation extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(MaNVSearch)
-                            .addGap(18, 18, 18)
-                            .addComponent(TenNVSearch))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(TelSearch)
-                            .addGap(18, 18, 18)
-                            .addComponent(EmailSearch))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(AddrSearch)
-                            .addGap(18, 18, 18)
-                            .addComponent(JobSearch))))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -428,11 +383,7 @@ public class EmployeeInformation extends javax.swing.JFrame {
                                                                                         
                 
     }
-    public void clearchoose() {
-        MaNVSearch.setSelected(false);
-        TenNVSearch.setSelected(false);
-        TelSearch.setSelected(false);
-    }
+   
     //hàm kiểm tra email nhập vào có tên miền tồn tại không?
     public static String email_Validation (String email) {
         String email_Pattern = "^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$";
@@ -563,7 +514,13 @@ public class EmployeeInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_EditButtonActionPerformed
     //làm mới
     private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
-            
+        User_load();
+        SearchSelection.setSelectedIndex(0);
+        TenNV.setText("");               
+        TelEmployee.setText("");               
+        Email.setText("");               
+        Address.setText("");                
+        JobName.setText("");
     }//GEN-LAST:event_RefreshButtonActionPerformed
     //xoá bản ghi
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -595,32 +552,54 @@ public class EmployeeInformation extends javax.swing.JFrame {
         
     }//GEN-LAST:event_DeleteButtonActionPerformed
     //Tìm kiếm bản ghi
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         String search = SearchField.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaNVSearch.isSelected()) {           
-                ps = con.prepareStatement("SELECT * FROM DAILY WHERE MaDaiLy = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenNVSearch.isSelected()) {
-                ps1 = con.prepareStatement("SELECT * FROM DAILY WHERE TenDaiLy = ?");      
-                ps1.setString(1,search);
-                rs1=ps1.executeQuery();                
-                EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs1));
-            } else if (TelSearch.isSelected()) {
-                ps2 = con.prepareStatement("SELECT * FROM DAILY WHERE Loai = ?");      
-                ps2.setString(1,search);
-                rs2=ps2.executeQuery();                
-                EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs2));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã nhân viên" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE MaNV = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên nhân viên" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE TenNV = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Số điện thoại" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE Tel = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Email" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE Email = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Địa chỉ" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE Address = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs2));
+                }
+                case "Chức vụ" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE Job = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs2));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
            
             } catch (SQLException ex) {
                 Logger.getLogger(EmployeeInformation.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_SearchActionPerformed
     //Xuất Excel
     private void ExcelExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcelExportActionPerformed
         // TODO add your handling code here:
@@ -770,27 +749,22 @@ public class EmployeeInformation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton AddrSearch;
     private javax.swing.JTextField Address;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
     private javax.swing.JTextField Email;
-    private javax.swing.JRadioButton EmailSearch;
     private javax.swing.JTable EmployeeInformation;
     private javax.swing.JButton ExcelExport;
     private javax.swing.JButton ExitButton;
     private javax.swing.JTextField JobName;
-    private javax.swing.JRadioButton JobSearch;
     private javax.swing.JTextField MaNV;
-    private javax.swing.JRadioButton MaNVSearch;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JTextField TelEmployee;
-    private javax.swing.JRadioButton TelSearch;
     private javax.swing.JTextField TenNV;
-    private javax.swing.JRadioButton TenNVSearch;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

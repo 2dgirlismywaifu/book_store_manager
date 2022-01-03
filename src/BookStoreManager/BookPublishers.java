@@ -82,13 +82,9 @@ public class BookPublishers extends javax.swing.JFrame {
         ExcelExport = new javax.swing.JButton();
         DateImport = new org.jdesktop.swingx.JXDatePicker();
         SearchField = new javax.swing.JTextField();
-        MaNCCSearch = new javax.swing.JRadioButton();
-        TenNCCSearch = new javax.swing.JRadioButton();
-        MaSachSearch = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         SoLuong = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
-        TelSearch = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         EditButton = new javax.swing.JButton();
@@ -98,6 +94,7 @@ public class BookPublishers extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         Price = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -185,15 +182,6 @@ public class BookPublishers extends javax.swing.JFrame {
             }
         });
 
-        MaNCCSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaNCCSearch.setText("Theo mã nhà cung cấp");
-
-        TenNCCSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenNCCSearch.setText("Theo tên nhà cung cấp");
-
-        MaSachSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaSachSearch.setText("Theo mã sách");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Số lượng");
@@ -205,9 +193,6 @@ public class BookPublishers extends javax.swing.JFrame {
                 ExitButtonActionPerformed(evt);
             }
         });
-
-        TelSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TelSearch.setText("Theo số điện thoại");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
@@ -244,6 +229,9 @@ public class BookPublishers extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("(tuỳ chọn)");
 
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã nhà cung cấp", "Tên nhà cung cấp", "Mã sách", "Số điện thoại" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -253,14 +241,14 @@ public class BookPublishers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(MaSach, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,25 +271,18 @@ public class BookPublishers extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(FinalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(FinalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(MaNCCSearch)
-                                    .addComponent(MaSachSearch))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TelSearch)
-                                    .addComponent(TenNCCSearch))))
-                        .addContainerGap(91, Short.MAX_VALUE))
+                                .addGap(47, 47, 47)
+                                .addComponent(SearchSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -316,7 +297,8 @@ public class BookPublishers extends javax.swing.JFrame {
                                 .addComponent(ExcelExport)
                                 .addGap(73, 73, 73)
                                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,17 +346,12 @@ public class BookPublishers extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MaNCCSearch)
                     .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TenNCCSearch))
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MaSachSearch)
-                    .addComponent(TelSearch))
-                .addGap(7, 7, 7)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UpdateTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -438,12 +415,7 @@ public class BookPublishers extends javax.swing.JFrame {
                                                                                         
                 
     }
-    public void clearchoose() {
-        MaNCCSearch.setSelected(false);
-        TenNCCSearch.setSelected(false);
-        MaSachSearch.setSelected(false);
-        TelSearch.setSelected(false);
-    }
+   
     
     //thao tac tren bang
     private void BookPublisherTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookPublisherTableMouseClicked
@@ -492,36 +464,41 @@ public class BookPublishers extends javax.swing.JFrame {
                     FinalPrice.setText("");
                     Telephone.setText("");
 
-                    clearchoose();
+                    SearchSelection.setSelectedIndex(0);
                     User_load();  
     }//GEN-LAST:event_RefreshButtonActionPerformed
 
    //Tìm kiếm bản ghi
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String search = SearchField.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaNCCSearch.isSelected()) {           
-                ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE MaNCC = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenNCCSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE TenNCC = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (MaSachSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE MaSach = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TelSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE SDT = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã nhà cung cấp" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE MaNCC = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên nhà cung cấp" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE TenNCC = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Mã sách" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE MaSach = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Số điện thoại" -> {
+                    ps = con.prepareStatement("SELECT * FROM NHACUNGCAP WHERE SDT = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BookPublisherTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
            
             } catch (SQLException ex) {
@@ -641,7 +618,7 @@ public class BookPublishers extends javax.swing.JFrame {
                     FinalPrice.setText("");
                     Telephone.setText("");
 
-                    clearchoose();
+                    SearchSelection.setSelectedIndex(0);
                     User_load();
                 } else if (asking0 == JOptionPane.NO_OPTION){
                     this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -720,17 +697,14 @@ public class BookPublishers extends javax.swing.JFrame {
     private javax.swing.JButton ExitButton;
     private javax.swing.JTextField FinalPrice;
     private javax.swing.JTextField MaNCC;
-    private javax.swing.JRadioButton MaNCCSearch;
     private javax.swing.JTextField MaSach;
-    private javax.swing.JRadioButton MaSachSearch;
     private javax.swing.JTextField Price;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JTextField SoLuong;
-    private javax.swing.JRadioButton TelSearch;
     private javax.swing.JTextField Telephone;
     private javax.swing.JTextField TenNCC;
-    private javax.swing.JRadioButton TenNCCSearch;
     private javax.swing.JButton UpdateTel;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

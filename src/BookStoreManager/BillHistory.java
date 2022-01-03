@@ -80,16 +80,11 @@ public class BillHistory extends javax.swing.JFrame {
         ExcelExport = new javax.swing.JButton();
         DateBuy = new org.jdesktop.swingx.JXDatePicker();
         SearchField = new javax.swing.JTextField();
-        MaHDSearch = new javax.swing.JRadioButton();
-        DateBuySearch = new javax.swing.JRadioButton();
-        MaKHSearch = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         TotalPrice = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
-        MaNVSearch = new javax.swing.JRadioButton();
-        TenNVSearch = new javax.swing.JRadioButton();
-        TenKHSearch = new javax.swing.JRadioButton();
         TenNV = new javax.swing.JTextField();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -189,15 +184,6 @@ public class BillHistory extends javax.swing.JFrame {
             }
         });
 
-        MaHDSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaHDSearch.setText("Theo mã hoá đơn");
-
-        DateBuySearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        DateBuySearch.setText("Theo ngày mua");
-
-        MaKHSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaKHSearch.setText("Theo mã khách hàng");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Tổng tiền");
@@ -210,14 +196,8 @@ public class BillHistory extends javax.swing.JFrame {
             }
         });
 
-        MaNVSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaNVSearch.setText("Theo mã nhân viên");
-
-        TenNVSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenNVSearch.setText("Theo tên nhân viên");
-
-        TenKHSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenKHSearch.setText("Theo tên khách hàng");
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã hoá đơn", "Mã khách hàng", "Tên khách hàng", "Mã nhân viên", "Tên nhân viên", "Ngày mua" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,9 +216,9 @@ public class BillHistory extends javax.swing.JFrame {
                         .addGap(145, 145, 145)
                         .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -266,24 +246,13 @@ public class BillHistory extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(DateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DateBuySearch)
-                                    .addComponent(MaHDSearch))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(MaNVSearch)
-                                    .addComponent(MaKHSearch))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TenNVSearch)
-                                    .addComponent(TenKHSearch))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(40, 40, 40)
+                                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(198, 198, 198)))
                         .addGap(29, 29, 29))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -323,29 +292,13 @@ public class BillHistory extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(SearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(MaHDSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(DateBuySearch))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(MaKHSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(MaNVSearch))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TenKHSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(TenNVSearch)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BillInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -409,14 +362,7 @@ public class BillHistory extends javax.swing.JFrame {
                                                                                         
                 
     }
-    public void clearchoose() {
-        MaHDSearch.setSelected(false);       
-        MaKHSearch.setSelected(false);
-        TenKHSearch.setSelected(false);
-        DateBuySearch.setSelected(false);
-        MaNVSearch.setSelected(false);
-        TenNVSearch.setSelected(false);
-    }
+    
     //thao tác trên bảng
     private void BillInfoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BillInfoTableMouseClicked
         SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy-MM-dd");
@@ -456,75 +402,82 @@ public class BillHistory extends javax.swing.JFrame {
         TotalPrice.setText("");
         
         User_load();
-        clearchoose();
+        SearchSelection.setSelectedIndex(0);
     }//GEN-LAST:event_RefreshButtonActionPerformed
 
    //Tìm kiếm bản ghi
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         String search = SearchField.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaHDSearch.isSelected()) {           
-               ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
-                                        "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
-                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                        "WHERE HOADON.MaKH = HOADON.MaKH AND " +
-                                        "HOADON.MaNV = NHANVIEN.MaNV AND " +
-                                        "HOADON.MaHD = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (MaKHSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
-                                        "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
-                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                        "WHERE HOADON.MaKH = HOADON.MaKH AND " +
-                                        "HOADON.MaNV = NHANVIEN.MaNV AND " +
-                                        "KHACHHANG.MaKH = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenKHSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
-                                        "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
-                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                        "WHERE HOADON.MaKH = HOADON.MaKH AND " +
-                                        "HOADON.MaNV = NHANVIEN.MaNV AND " +
-                                        "KHACHHANG.HoTenKH = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (DateBuySearch.isSelected()) {
-                ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
-                                        "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
-                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                        "WHERE HOADON.MaKH = HOADON.MaKH AND " +
-                                        "HOADON.MaNV = NHANVIEN.MaNV AND " +
-                                        "HOADON.NgayMua = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (MaNVSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
-                                        "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
-                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                        "WHERE HOADON.MaKH = HOADON.MaKH AND " +
-                                        "HOADON.MaNV = NHANVIEN.MaNV AND " +
-                                        "HOADON.MaNV = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenNVSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
-                                        "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
-                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                        "WHERE HOADON.MaKH = HOADON.MaKH AND " +
-                                        "HOADON.MaNV = NHANVIEN.MaNV AND " +
-                                        "NHANVIEN.TenNV = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã hoá đơn" -> {
+                    ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
+                            "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
+                            "FROM HOADON, KHACHHANG, NHANVIEN\n" +
+                            "WHERE HOADON.MaKH = HOADON.MaKH AND " +
+                            "HOADON.MaNV = NHANVIEN.MaNV AND " +
+                            "HOADON.MaHD = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Mã khách hàng" -> {
+                    ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
+                            "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
+                            "FROM HOADON, KHACHHANG, NHANVIEN\n" +
+                            "WHERE HOADON.MaKH = HOADON.MaKH AND " +
+                            "HOADON.MaNV = NHANVIEN.MaNV AND " +
+                            "KHACHHANG.MaKH = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên khách hàng" -> {
+                    ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
+                            "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
+                            "FROM HOADON, KHACHHANG, NHANVIEN\n" +
+                            "WHERE HOADON.MaKH = HOADON.MaKH AND " +
+                            "HOADON.MaNV = NHANVIEN.MaNV AND " +
+                            "KHACHHANG.HoTenKH = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Ngày mua" -> {
+                    ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
+                            "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
+                            "FROM HOADON, KHACHHANG, NHANVIEN\n" +
+                            "WHERE HOADON.MaKH = HOADON.MaKH AND " +
+                            "HOADON.MaNV = NHANVIEN.MaNV AND " +
+                            "HOADON.NgayMua = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Mã nhân viên" -> {
+                    ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
+                            "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
+                            "FROM HOADON, KHACHHANG, NHANVIEN\n" +
+                            "WHERE HOADON.MaKH = HOADON.MaKH AND " +
+                            "HOADON.MaNV = NHANVIEN.MaNV AND " +
+                            "HOADON.MaNV = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên nhân viên" -> {
+                    ps = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, " +
+                            "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
+                            "FROM HOADON, KHACHHANG, NHANVIEN\n" +
+                            "WHERE HOADON.MaKH = HOADON.MaKH AND " +
+                            "HOADON.MaNV = NHANVIEN.MaNV AND " +
+                            "NHANVIEN.TenNV = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    BillInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
            
             } catch (SQLException ex) {
@@ -646,22 +599,17 @@ public class BillHistory extends javax.swing.JFrame {
     private javax.swing.JButton BillInfoButton;
     private javax.swing.JTable BillInfoTable;
     private org.jdesktop.swingx.JXDatePicker DateBuy;
-    private javax.swing.JRadioButton DateBuySearch;
     private javax.swing.JButton ExcelExport;
     private javax.swing.JButton ExitButton;
     public static javax.swing.JTextField MaHD;
-    private javax.swing.JRadioButton MaHDSearch;
     private javax.swing.JTextField MaKH;
-    private javax.swing.JRadioButton MaKHSearch;
     private javax.swing.JTextField MaNV;
-    private javax.swing.JRadioButton MaNVSearch;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JButton SearchButton;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JTextField TenKH;
-    private javax.swing.JRadioButton TenKHSearch;
     private javax.swing.JTextField TenNV;
-    private javax.swing.JRadioButton TenNVSearch;
     private javax.swing.JTextField TotalPrice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

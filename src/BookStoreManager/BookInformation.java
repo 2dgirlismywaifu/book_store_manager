@@ -87,9 +87,6 @@ public class BookInformation extends javax.swing.JFrame {
         ExcelExport = new javax.swing.JButton();
         DateImport = new org.jdesktop.swingx.JXDatePicker();
         SearchField = new javax.swing.JTextField();
-        MaSachSearch = new javax.swing.JRadioButton();
-        TenSachSearch = new javax.swing.JRadioButton();
-        TheLoaiSearch = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
         TheLoai = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -97,13 +94,11 @@ public class BookInformation extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         SoLuong = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
-        TacGiaSearch = new javax.swing.JRadioButton();
-        NhaXBSearch = new javax.swing.JRadioButton();
-        NamXBSearch = new javax.swing.JRadioButton();
         NhaCC = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         AboutNhaCC = new javax.swing.JButton();
         GetNhaCC = new javax.swing.JButton();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -219,15 +214,6 @@ public class BookInformation extends javax.swing.JFrame {
             }
         });
 
-        MaSachSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaSachSearch.setText("Theo mã sách");
-
-        TenSachSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenSachSearch.setText("Theo tên sách");
-
-        TheLoaiSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TheLoaiSearch.setText("Theo thể loại");
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Thể loại");
@@ -248,15 +234,6 @@ public class BookInformation extends javax.swing.JFrame {
             }
         });
 
-        TacGiaSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TacGiaSearch.setText("Theo tác giả");
-
-        NhaXBSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        NhaXBSearch.setText("Theo nhà xuất bản");
-
-        NamXBSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        NamXBSearch.setText("Theo năm xuất bản");
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Nhà cung cấp");
@@ -276,6 +253,9 @@ public class BookInformation extends javax.swing.JFrame {
                 GetNhaCCActionPerformed(evt);
             }
         });
+
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã sách", "Tên sách", "Thể loại", "Tác giả", "Năm xuất bản", "Nhà xuất bản" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -298,81 +278,69 @@ public class BookInformation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TenSachSearch)
-                                    .addComponent(MaSachSearch))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TacGiaSearch)
-                                    .addComponent(TheLoaiSearch))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NhaXBSearch)
-                                    .addComponent(NamXBSearch))
-                                .addGap(0, 34, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(MaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(TacGia, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TenSach, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NhaCC, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(GetNhaCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(AboutNhaCC)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(NhaXB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(NamXB, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(MaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(TacGia, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TenSach, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(NhaCC, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(GetNhaCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(AboutNhaCC)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(133, 133, 133)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(14, 14, 14)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(NhaXB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                            .addComponent(NamXB, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(14, 14, 14)
-                                                .addComponent(DateImport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(13, 13, 13)
-                                                .addComponent(SoLuong))))
+                                        .addComponent(DateImport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Price, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(13, 13, 13)
+                                        .addComponent(SoLuong))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Price, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(33, 33, 33))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,28 +392,12 @@ public class BookInformation extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(GetNhaCC))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(56, 56, 56))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(MaSachSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(TenSachSearch))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(TheLoaiSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(TacGiaSearch))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(NamXBSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(NhaXBSearch)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -508,14 +460,7 @@ public class BookInformation extends javax.swing.JFrame {
         }                                                                                          
     }
     
-    public void clearchoose() {
-        MaSachSearch.setSelected(false);
-        TenSachSearch.setSelected(false);
-        TheLoaiSearch.setSelected(false);
-        TacGiaSearch.setSelected(false);
-        NamXBSearch.setSelected(false);
-        NhaXBSearch.setSelected(false);
-    }   
+       
     
     //thêm thông tin sách
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
@@ -578,7 +523,7 @@ public class BookInformation extends javax.swing.JFrame {
                     NhaCC.setText("");
                     SoLuong.setText("");
 
-                    clearchoose();
+                    SearchSelection.setSelectedIndex(0);
                     User_load();
                 } else if (asking0 == JOptionPane.NO_OPTION){
                     this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -678,7 +623,7 @@ public class BookInformation extends javax.swing.JFrame {
 
                     SaveButton.setEnabled(true);
   
-                    clearchoose();
+                    SearchSelection.setSelectedIndex(0);
                     User_load();
                 } else if (asking0 == JOptionPane.NO_OPTION){
                     this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -714,7 +659,8 @@ public class BookInformation extends javax.swing.JFrame {
             NhaCC.setText("");
             SoLuong.setText("");
             SaveButton.setEnabled(true);
-            clearchoose();
+            
+            SearchSelection.setSelectedIndex(0);
             User_load();
             
             
@@ -737,49 +683,57 @@ public class BookInformation extends javax.swing.JFrame {
         SoLuong.setText("");
                
         SaveButton.setEnabled(true);
-        clearchoose();
+        SearchSelection.setSelectedIndex(0);
         User_load();
     }//GEN-LAST:event_RefreshButtonActionPerformed
     //tinh nang tim kiem ban ghi
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         String search = SearchField.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaSachSearch.isSelected()) {           
-                ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE MaSach = ?");      
-                ps.setString(1,search);
-                rs = ps.executeQuery();                
-                BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenSachSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE TenSach = ?");      
-                ps.setString(1,search);
-                rs = ps.executeQuery();                
-                BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TheLoaiSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE TheLoai = ?");      
-                ps.setString(1,search);
-                rs = ps.executeQuery();                
-                BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TacGiaSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE TacGia = ?");      
-                ps.setString(1,search);
-                rs = ps.executeQuery();                
-                BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (NamXBSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE NamXuatBan = ?");      
-                ps.setString(1,search);
-                rs = ps.executeQuery();                
-                BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (NhaXBSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE NhaXuatBan = ?");      
-                ps.setString(1,search);
-                rs = ps.executeQuery();                
-                BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã sách" -> {
+                    ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE MaSach = ?");
+                    ps.setString(1,search);
+                    rs = ps.executeQuery();
+                    BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên sách" -> {
+                    ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE TenSach = ?");
+                    ps.setString(1,search);
+                    rs = ps.executeQuery();
+                    BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Thể loại" -> {
+                    ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE TheLoai = ?");
+                    ps.setString(1,search);
+                    rs = ps.executeQuery();
+                    BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tác giả" -> {
+                    ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE TacGia = ?");
+                    ps.setString(1,search);
+                    rs = ps.executeQuery();
+                    BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Năm xuất bản" -> {
+                    ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE NamXuatBan = ?");
+                    ps.setString(1,search);
+                    rs = ps.executeQuery();
+                    BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Nhà xuất bản" -> {
+                    ps = con.prepareStatement("SELECT * FROM THONGTINSACH WHERE NhaXuatBan = ?");
+                    ps.setString(1,search);
+                    rs = ps.executeQuery();
+                    BookInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
            
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,"Không tìm thấy theo yêu cầu","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(BookInformation.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1110,23 +1064,18 @@ public class BookInformation extends javax.swing.JFrame {
     private javax.swing.JButton ExitButton;
     private javax.swing.JButton GetNhaCC;
     private javax.swing.JTextField MaSach;
-    private javax.swing.JRadioButton MaSachSearch;
     private javax.swing.JTextField NamXB;
-    private javax.swing.JRadioButton NamXBSearch;
     private javax.swing.JTextField NhaCC;
     private javax.swing.JTextField NhaXB;
-    private javax.swing.JRadioButton NhaXBSearch;
     private javax.swing.JTextField Price;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JButton SaveButton;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JTextField SoLuong;
     private javax.swing.JTextField TacGia;
-    private javax.swing.JRadioButton TacGiaSearch;
     private javax.swing.JTextField TenSach;
-    private javax.swing.JRadioButton TenSachSearch;
     private javax.swing.JTextField TheLoai;
-    private javax.swing.JRadioButton TheLoaiSearch;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

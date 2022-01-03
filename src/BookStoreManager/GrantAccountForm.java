@@ -18,10 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSetMetaData;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Vector;
-import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
@@ -74,13 +71,10 @@ public class GrantAccountForm extends javax.swing.JFrame {
         EditButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
         RefreshButton = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        Search = new javax.swing.JButton();
         ExcelExport = new javax.swing.JButton();
         SearchField = new javax.swing.JTextField();
-        MaNVSearch = new javax.swing.JRadioButton();
-        AccSearch = new javax.swing.JRadioButton();
         ExitButton = new javax.swing.JButton();
-        LevelSearch = new javax.swing.JRadioButton();
         level0 = new javax.swing.JRadioButton();
         level1 = new javax.swing.JRadioButton();
         level2 = new javax.swing.JRadioButton();
@@ -89,6 +83,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         MaNVList = new javax.swing.JComboBox<>();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -180,11 +175,11 @@ public class GrantAccountForm extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton6.setText("Tìm kiếm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        Search.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Search.setText("Tìm kiếm");
+        Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                SearchActionPerformed(evt);
             }
         });
 
@@ -196,12 +191,6 @@ public class GrantAccountForm extends javax.swing.JFrame {
             }
         });
 
-        MaNVSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaNVSearch.setText("Theo mã nhân viên");
-
-        AccSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        AccSearch.setText("Theo tài khoản");
-
         ExitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ExitButton.setText("Thoát");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -209,9 +198,6 @@ public class GrantAccountForm extends javax.swing.JFrame {
                 ExitButtonActionPerformed(evt);
             }
         });
-
-        LevelSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LevelSearch.setText("Theo cấp độ");
 
         level0.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         level0.setText("Quản trị");
@@ -237,6 +223,9 @@ public class GrantAccountForm extends javax.swing.JFrame {
         jLabel7.setText("CHÚ Ý: Mật khẩu được băm (hash) bằng BCrypt. Không có cách nào có thể giải ngược lại mật khẩu");
 
         MaNVList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn mã nhân viên" }));
+
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã nhân viên", "Tài khoản", "Cấp độ" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -270,46 +259,41 @@ public class GrantAccountForm extends javax.swing.JFrame {
                         .addGap(161, 161, 161))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(MaNVSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(AccSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(LevelSearch)
-                        .addContainerGap(155, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(level0, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(level2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(level1)))
-                        .addGap(134, 134, 134))))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(level0, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(level2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(level1)))
+                .addGap(134, 134, 134))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +314,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -351,18 +335,11 @@ public class GrantAccountForm extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(RecKeyInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AccSearch)
-                            .addComponent(MaNVSearch)
-                            .addComponent(LevelSearch))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -435,11 +412,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
                                                                                         
                 
     }
-    public void clearchoose() {
-        MaNVSearch.setSelected(false);
-        AccSearch.setSelected(false);
-        LevelSearch.setSelected(false);
-    }
+    
     
     //thêm bản ghi
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
@@ -593,7 +566,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
         RecKeyInformation.setText("");
         
         User_load();
-        clearchoose();
+        SearchSelection.setSelectedIndex(0);
     }//GEN-LAST:event_RefreshButtonActionPerformed
     //xoá bản ghi
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -614,32 +587,36 @@ public class GrantAccountForm extends javax.swing.JFrame {
        
     }//GEN-LAST:event_DeleteButtonActionPerformed
     //Tìm kiếm bản ghi
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         String search = SearchField.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaNVSearch.isSelected()) {           
-                ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE MaNV = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                AccountTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (AccSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM DANHNHAP WHERE Username = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                AccountTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (LevelSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE AccLevel = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                AccountTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã nhân viên" -> {
+                    ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE MaNV = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    AccountTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tài khoản" -> {
+                    ps = con.prepareStatement("SELECT * FROM DANHNHAP WHERE Username = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    AccountTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Cấp độ" -> {
+                    ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE AccLevel = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    AccountTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
            
             } catch (SQLException ex) {
                 Logger.getLogger(GrantAccountForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_SearchActionPerformed
     //Xuất Excel
     private void ExcelExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcelExportActionPerformed
         // TODO add your handling code here:
@@ -753,21 +730,19 @@ public class GrantAccountForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton AccSearch;
     private javax.swing.JTable AccountTable;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
     private javax.swing.JButton ExcelExport;
     private javax.swing.JButton ExitButton;
-    private javax.swing.JRadioButton LevelSearch;
     private javax.swing.JComboBox<String> MaNVList;
-    private javax.swing.JRadioButton MaNVSearch;
     private javax.swing.JTextField RecKeyInformation;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -78,14 +78,12 @@ public class CustomerInformation extends javax.swing.JFrame {
         ExcelExport = new javax.swing.JButton();
         DateImport = new org.jdesktop.swingx.JXDatePicker();
         SearchField = new javax.swing.JTextField();
-        MaKhSearch = new javax.swing.JRadioButton();
-        TenKhSearch = new javax.swing.JRadioButton();
         ExitButton = new javax.swing.JButton();
-        LevelSearch = new javax.swing.JRadioButton();
         CautionLabel = new javax.swing.JLabel();
         CustomerLevel = new javax.swing.JComboBox<>();
         TelCustomer = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        SearchSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -170,12 +168,6 @@ public class CustomerInformation extends javax.swing.JFrame {
             }
         });
 
-        MaKhSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MaKhSearch.setText("Theo mã khách hàng");
-
-        TenKhSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        TenKhSearch.setText("Theo tên khách hàng");
-
         ExitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ExitButton.setText("Thoát");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -183,9 +175,6 @@ public class CustomerInformation extends javax.swing.JFrame {
                 ExitButtonActionPerformed(evt);
             }
         });
-
-        LevelSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LevelSearch.setText("Theo thứ hạng");
 
         CautionLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CautionLabel.setForeground(new java.awt.Color(255, 51, 51));
@@ -197,6 +186,9 @@ public class CustomerInformation extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Số điện thoại");
+
+        SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã khách hàng", "Tên khách hàng", "Thứ hạng" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -251,16 +243,12 @@ public class CustomerInformation extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(196, 196, 196)
                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(MaKhSearch)
-                .addGap(20, 20, 20)
-                .addComponent(TenKhSearch)
-                .addGap(18, 18, 18)
-                .addComponent(LevelSearch)
+                .addGap(52, 52, 52)
+                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,20 +288,14 @@ public class CustomerInformation extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(DateImport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TenKhSearch)
-                            .addComponent(MaKhSearch)
-                            .addComponent(LevelSearch))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ExcelExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -375,11 +357,7 @@ public class CustomerInformation extends javax.swing.JFrame {
                                                                                         
                 
     }
-    public void clearchoose() {
-        MaKhSearch.setSelected(false);
-        LevelSearch.setSelected(false);
-        TenKhSearch.setSelected(false);
-    }
+    
     
     //thao tác bảng
     private void CustomerInfoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerInfoTableMouseClicked
@@ -410,7 +388,7 @@ public class CustomerInformation extends javax.swing.JFrame {
    //làm mới
     private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
         User_load();
-        clearchoose();
+        SearchSelection.setSelectedIndex(0);
         MaKH.setEditable(true);
         TenKH.setEditable(true);
         TelCustomer.setEditable(true);
@@ -423,24 +401,28 @@ public class CustomerInformation extends javax.swing.JFrame {
    //Tìm kiếm bản ghi
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String search = SearchField.getText();
+        String typesearch = SearchSelection.getSelectedItem().toString();
         try {
-            if (MaKhSearch.isSelected()) {           
-                ps = con.prepareStatement("SELECT * FROM KHACHHANG WHERE MaKH = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                CustomerInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (LevelSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM KHACHHANG WHERE ThuHang = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                CustomerInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else if (TenKhSearch.isSelected()) {
-                ps = con.prepareStatement("SELECT * FROM KHACHHANG WHERE HoTenKH = ?");      
-                ps.setString(1,search);
-                rs=ps.executeQuery();                
-                CustomerInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
-            } else {
-                JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
+            switch (typesearch) {
+                case "Mã khách hàng" -> {
+                    ps = con.prepareStatement("SELECT * FROM KHACHHANG WHERE MaKH = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    CustomerInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Thứ hạng" -> {
+                    ps = con.prepareStatement("SELECT * FROM KHACHHANG WHERE ThuHang = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    CustomerInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                case "Tên khách hàng" -> {
+                    ps = con.prepareStatement("SELECT * FROM KHACHHANG WHERE HoTenKH = ?");
+                    ps.setString(1,search);
+                    rs=ps.executeQuery();
+                    CustomerInfoTable.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }
            
             } catch (SQLException ex) {
@@ -566,15 +548,13 @@ public class CustomerInformation extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker DateImport;
     public static javax.swing.JButton ExcelExport;
     private javax.swing.JButton ExitButton;
-    private javax.swing.JRadioButton LevelSearch;
     private javax.swing.JTextField MaKH;
-    private javax.swing.JRadioButton MaKhSearch;
     private javax.swing.JButton RefreshButton;
     private javax.swing.JTextField SearchField;
+    private javax.swing.JComboBox<String> SearchSelection;
     private javax.swing.JTextField SoLuong;
     private javax.swing.JTextField TelCustomer;
     private javax.swing.JTextField TenKH;
-    private javax.swing.JRadioButton TenKhSearch;
     private javax.swing.JTextField TotalPrice;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
