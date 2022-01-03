@@ -63,7 +63,6 @@ public class GrantAccountForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         AccountTable = new javax.swing.JTable();
@@ -75,15 +74,16 @@ public class GrantAccountForm extends javax.swing.JFrame {
         ExcelExport = new javax.swing.JButton();
         SearchField = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
-        level0 = new javax.swing.JRadioButton();
-        level1 = new javax.swing.JRadioButton();
-        level2 = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         RecKeyInformation = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Help = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         MaNVList = new javax.swing.JComboBox<>();
         SearchSelection = new javax.swing.JComboBox<>();
+        LevelSelection = new javax.swing.JComboBox<>();
+        ClearPassField = new javax.swing.JButton();
+        ShowPassword = new javax.swing.JCheckBox();
+        password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -199,33 +199,49 @@ public class GrantAccountForm extends javax.swing.JFrame {
             }
         });
 
-        level0.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        level0.setText("Quản trị");
-
-        level1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        level1.setText("Thủ kho/nhập hàng");
-
-        level2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        level2.setText("Bán hàng");
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Khoá phục hồi");
 
-        RecKeyInformation.setEditable(false);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("?");
+        Help.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Help.setText("?");
+        Help.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HelpActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("CHÚ Ý: Mật khẩu được băm (hash) bằng BCrypt. Không có cách nào có thể giải ngược lại mật khẩu");
 
+        MaNVList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         MaNVList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn mã nhân viên" }));
 
         SearchSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         SearchSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại tìm kiếm", "Mã nhân viên", "Tài khoản", "Cấp độ" }));
+
+        LevelSelection.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LevelSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn cấp độ", "Quản Trị", "Thủ Kho", "Bán Hàng" }));
+
+        ClearPassField.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ClearPassField.setText("Xoá mật khẩu");
+        ClearPassField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearPassFieldActionPerformed(evt);
+            }
+        });
+
+        ShowPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ShowPassword.setText("Hiện mật khẩu");
+        ShowPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowPasswordActionPerformed(evt);
+            }
+        });
+
+        password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -258,6 +274,18 @@ public class GrantAccountForm extends javax.swing.JFrame {
                         .addComponent(RecKeyInformation)
                         .addGap(161, 161, 161))))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -266,34 +294,23 @@ public class GrantAccountForm extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(LevelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(level0, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(level2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(level1)))
-                .addGap(134, 134, 134))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(SearchSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Help)
+                        .addGap(18, 18, 18)
+                        .addComponent(ClearPassField)
+                        .addGap(18, 18, 18)
+                        .addComponent(ShowPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,41 +324,41 @@ public class GrantAccountForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
-                                .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
+                                .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1)))
-                        .addGap(22, 22, 22))
+                                .addComponent(jLabel4)
+                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Help)
+                                .addComponent(ClearPassField)
+                                .addComponent(ShowPassword)))
+                        .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(level0)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(level1)
-                                .addGap(18, 18, 18)
-                                .addComponent(level2)))
+                                .addGap(1, 1, 1)
+                                .addComponent(LevelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(RecKeyInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchSelection, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SearchSelection, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DeleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -370,7 +387,8 @@ public class GrantAccountForm extends javax.swing.JFrame {
     public void User_load() {
         int c;
         String skipuser = AdminPageForm.UserName.getText(); //bỏ qua tài khoản đang đăng nhập
-        RecKeyInformation.setEditable(false);
+        RecKeyInformation.setEditable(true);
+        LevelSelection.setSelectedIndex(0);
         MaNVList.setSelectedIndex(0);
         //danh sach thong tin sach
         
@@ -421,59 +439,71 @@ public class GrantAccountForm extends javax.swing.JFrame {
        employeecode = MaNVList.getSelectedItem().toString();
        user = username.getText();
        pass = password.getText();
-       
+       level = LevelSelection.getSelectedItem().toString();
        if (employeecode.equals("Chọn mã nhân viên") ||
            user.equals("") ||
-           pass.equals("") ) {
+           pass.equals("") ||
+           level.equals("Chọn cấp độ")) {
            JOptionPane.showMessageDialog(this,"Vui lòng nhập đầy đủ thông tin",
                 "Thông báo",JOptionPane.ERROR_MESSAGE);
        }
        else {
            try {
-                ps = con.prepareStatement("INSERT DANGNHAP (MaNV, Username, Password, Acclevel) VALUES (?,?,?,?)");
-                ps0 = con.prepareStatement("SELECT Username, COUNT(Username) AS VAILD FROM NHACUNGCAP WHERE Username = ? GROUP BY Username");
+                ps0 = con.prepareStatement("SELECT COUNT(Username) AS VAILD FROM DANGNHAP WHERE Username = ? GROUP BY Username");
                 ps0.setString(1, user);
                 rs = ps0.executeQuery();
                 
                 if(rs.next()) {
                     Integer vaild = Integer.valueOf(rs.getString("VAILD"));
-                    if (vaild > 0) {
-                        JOptionPane.showMessageDialog(this,"Tên tài khoản đã tồn tại!",
+                    if (vaild == 1) {                      
+                         JOptionPane.showMessageDialog(this,"Tên tài khoản đã tồn tại!",
                     "Thông báo",JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        if (level0.isSelected()) {        //quản trị 
-                            level = "Quản Trị";
-                            ps.setString(1,employeecode);
-                            ps.setString(2, user);
-                            ps.setString(3, pass);
-                            ps.setString(4, level);
-                            ps.executeUpdate();
-                            JOptionPane.showMessageDialog(this,"Thêm tài khoản thành công!",
-                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        } else if (level1.isSelected()) {  //thủ kho
-                            level = "Thủ Kho";                        
-                            ps.setString(1,employeecode);
-                            ps.setString(2, user);
-                            ps.setString(3, pass);
-                            ps.setString(4, level);
-                            ps.executeUpdate();
-                            JOptionPane.showMessageDialog(this,"Thêm tài khoản thành công!",
-                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        } else if (level2.isSelected()) {  //bán hàng
-                            level = "Bán hàng";  
-                            ps.setString(1,employeecode);
-                            ps.setString(2, user);
-                            ps.setString(3, pass);
-                            ps.setString(4, level);
-                            ps.executeUpdate(); 
-                            JOptionPane.showMessageDialog(this,"Thêm tài khoản thành công!",
-                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this,"Chưa chọn loại tài khoản","Cấp tài khoản", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } 
+                    }                  
                 }
+                switch (level) {
+                            case "Quản Trị" -> {
+                                //quản trị
+                                ps = con.prepareStatement("INSERT DANGNHAP (MaNV, Username, Password, Acclevel) VALUES (?,?,?,?)");
+                                ps.setString(1,employeecode);
+                                ps.setString(2, user);
+                                ps.setString(3, pass);
+                                ps.setString(4, level);
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(this,"Thêm tài khoản thành công!",
+                                        "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            case "Thủ Kho" -> {
+                                //thủ kho
+                                ps = con.prepareStatement("INSERT DANGNHAP (MaNV, Username, Password, Acclevel) VALUES (?,?,?,?)");
+                                ps.setString(1,employeecode);
+                                ps.setString(2, user);
+                                ps.setString(3, pass);
+                                ps.setString(4, level);
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(this,"Thêm tài khoản thành công!",
+                                        "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            case "Bán Hàng" -> {
+                                //bán hàng
+                                ps = con.prepareStatement("INSERT DANGNHAP (MaNV, Username, Password, Acclevel) VALUES (?,?,?,?)");
+                                ps.setString(1,employeecode);
+                                ps.setString(2, user);
+                                ps.setString(3, pass);
+                                ps.setString(4, level);
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(this,"Thêm tài khoản thành công!",
+                                        "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tài khoản","Cấp tài khoản", JOptionPane.ERROR_MESSAGE);
+                        }
+                
+                username.setText("");
+                password.setText("");
+                RecKeyInformation.setText("");
+
+                User_load();
+                LevelSelection.setSelectedIndex(0);
+                SearchSelection.setSelectedIndex(0);
            
             } catch (SQLException ex) {
                 Logger.getLogger(GrantAccountForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -487,8 +517,10 @@ public class GrantAccountForm extends javax.swing.JFrame {
         MaNVList.setSelectedItem(d.getValueAt(selectIndex, 0).toString());
         username.setText(d.getValueAt(selectIndex, 1).toString());
         password.setText(d.getValueAt(selectIndex, 2).toString());
+        LevelSelection.setSelectedItem(d.getValueAt(selectIndex, 3).toString());
         RecKeyInformation.setText(d.getValueAt(selectIndex, 4).toString());
                    
+        username.setEditable(false);
         MaNVList.setEnabled(false);
         SaveButton.setEnabled(false);
     }//GEN-LAST:event_AccountTableMouseClicked
@@ -500,59 +532,67 @@ public class GrantAccountForm extends javax.swing.JFrame {
        employeecode = d.getValueAt(selectIndex, 0).toString();
        user = username.getText();
        pass = password.getText();
-       
+       level = LevelSelection.getSelectedItem().toString();
        if (user.equals("") ||
-           pass.equals("") ) {
+           pass.equals("") ||
+           level.equals("Chọn cấp độ")) {
            JOptionPane.showMessageDialog(this,"Vui lòng nhập đầy đủ thông tin",
                 "Thông báo",JOptionPane.ERROR_MESSAGE);
        }
        else {
-           try {
-                ps = con.prepareStatement("UPDATE DANGNHAP SET Username = ?, Password = ?, Acclevel = ? "
-                        + "WHERE MaNv = ?");
-                ps0 = con.prepareStatement("SELECT Username, COUNT(Username) AS VAILD FROM NHACUNGCAP WHERE Username = ? GROUP BY Username");
-                ps0.setString(1, user);
-                rs = ps0.executeQuery();
-                
-                if(rs.next()) {
-                    Integer vaild = Integer.valueOf(rs.getString("VAILD"));
-                    if (vaild > 0) {
-                        JOptionPane.showMessageDialog(this,"Tên tài khoản đã tồn tại!",
-                    "Thông báo",JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        if (level0.isSelected()) {        //quản trị 
-                            level = "Quản Trị";
-                            ps.setString(1, user);
-                            ps.setString(2, pass);
-                            ps.setString(3, level);
-                            ps.setString(4,employeecode);
-                            ps.executeUpdate();
-                            JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thành công!",
-                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        } else if (level1.isSelected()) {  //thủ kho
-                            level = "Thủ Kho";                        
-                            ps.setString(1, user);
-                            ps.setString(2, pass);
-                            ps.setString(3, level);
-                            ps.setString(4,employeecode);
-                            ps.executeUpdate();
-                            JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thành công!",
-                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        } else if (level2.isSelected()) {  //bán hàng
-                            level = "Bán hàng";  
-                            ps.setString(1, user);
-                            ps.setString(2, pass);
-                            ps.setString(3, level);
-                            ps.setString(4,employeecode);
-                            ps.executeUpdate();
-                            JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thành công!",
-                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this,"Chưa chọn loại tài khoản","Cấp tài khoản", JOptionPane.ERROR_MESSAGE);
+           try {                
+                switch (level) {
+                            case "Quản Trị" -> {
+                                //quản trị
+                                ps = con.prepareStatement("UPDATE DANGNHAP SET Username = ?, Password = ?, Acclevel = ? "
+                                        + "WHERE MaNv = ?");
+                                ps.setString(1, user);
+                                ps.setString(2, pass);
+                                ps.setString(3, level);
+                                ps.setString(4,employeecode);
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thành công!",
+                                        "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            case "Thủ Kho" -> {
+                                //thủ kho
+                                ps = con.prepareStatement("UPDATE DANGNHAP SET Username = ?, Password = ?, Acclevel = ? "
+                                        + "WHERE MaNv = ?");
+                                ps.setString(1, user);
+                                ps.setString(1, user);
+                                ps.setString(2, pass);
+                                ps.setString(3, level);
+                                ps.setString(4,employeecode);
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thành công!",
+                                        "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            case "Bán Hàng" -> {
+                                //bán hàng
+                                ps = con.prepareStatement("UPDATE DANGNHAP SET Username = ?, Password = ?, Acclevel = ? "
+                                        + "WHERE MaNv = ?");
+                                ps.setString(1, user);
+                                ps.setString(1, user);
+                                ps.setString(2, pass);
+                                ps.setString(3, level);
+                                ps.setString(4,employeecode);
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thành công!",
+                                        "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tài khoản","Cấp tài khoản", JOptionPane.ERROR_MESSAGE);
                         }
-                    } 
-                }
+                
+                MaNVList.setEnabled(true);
+                SaveButton.setEnabled(true);
+                username.setText("");
+                password.setText("");
+                RecKeyInformation.setText("");
+
+                User_load();
+                username.setEditable(true);
+                LevelSelection.setSelectedIndex(0);
+                SearchSelection.setSelectedIndex(0);
            
             } catch (SQLException ex) {
                 Logger.getLogger(GrantAccountForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -566,6 +606,8 @@ public class GrantAccountForm extends javax.swing.JFrame {
         RecKeyInformation.setText("");
         
         User_load();
+        username.setEditable(true);
+        LevelSelection.setSelectedIndex(0);
         SearchSelection.setSelectedIndex(0);
     }//GEN-LAST:event_RefreshButtonActionPerformed
     //xoá bản ghi
@@ -683,6 +725,27 @@ public class GrantAccountForm extends javax.swing.JFrame {
          this.dispose();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
+    private void HelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Mật khẩu tự động mã hoá qua BCrypt\n"
+                + "Khi chọn xem tài khoản từ bảng sẽ không tự động giải mã được",
+                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_HelpActionPerformed
+
+    private void ShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPasswordActionPerformed
+        // TODO add your handling code here:
+        if (ShowPassword.isSelected()){
+            password.setEchoChar((char)0);
+        } else {
+            password.setEchoChar('*');
+        }
+    }//GEN-LAST:event_ShowPasswordActionPerformed
+
+    private void ClearPassFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearPassFieldActionPerformed
+        // TODO add your handling code here:
+        password.setText("");
+    }//GEN-LAST:event_ClearPassFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -731,10 +794,13 @@ public class GrantAccountForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AccountTable;
+    private javax.swing.JButton ClearPassField;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
     private javax.swing.JButton ExcelExport;
     private javax.swing.JButton ExitButton;
+    private javax.swing.JButton Help;
+    private javax.swing.JComboBox<String> LevelSelection;
     private javax.swing.JComboBox<String> MaNVList;
     private javax.swing.JTextField RecKeyInformation;
     private javax.swing.JButton RefreshButton;
@@ -742,7 +808,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
     private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
     private javax.swing.JComboBox<String> SearchSelection;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox ShowPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -753,10 +819,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton level0;
-    private javax.swing.JRadioButton level1;
-    private javax.swing.JRadioButton level2;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

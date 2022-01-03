@@ -45,7 +45,7 @@ public final class StoragePageForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        UserName = new javax.swing.JMenuItem();
+        StorageAcc = new javax.swing.JMenuItem();
         Changpassword = new javax.swing.JMenuItem();
         RecoveryKey = new javax.swing.JMenuItem();
         Logout = new javax.swing.JMenuItem();
@@ -91,9 +91,9 @@ public final class StoragePageForm extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        UserName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8-name-16.png"))); // NOI18N
-        UserName.setText("Thông tin tài khoản");
-        jMenu1.add(UserName);
+        StorageAcc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8-name-16.png"))); // NOI18N
+        StorageAcc.setText("Thông tin tài khoản");
+        jMenu1.add(StorageAcc);
 
         Changpassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/modify-key-icon (1).png"))); // NOI18N
         Changpassword.setText("Thay đổi mật khẩu");
@@ -236,7 +236,7 @@ public final class StoragePageForm extends javax.swing.JFrame {
         rk.setTitle("Khoá phục hồi");
         try {
             ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE username = ?");
-            ps.setString(1, UserName.getText());
+            ps.setString(1, StorageAcc.getText());
             rs = ps.executeQuery();
             if (rs.next()) {
                  rk.username.setText(rs.getString(2));
@@ -332,7 +332,7 @@ public final class StoragePageForm extends javax.swing.JFrame {
             public void run() {
                 
                 StoragePageForm mf = new StoragePageForm();
-                mf.UserName.setEnabled(false);
+                mf.StorageAcc.setEnabled(false);
                 mf.setVisible(true);
                 mf.setResizable(false);
                 mf.setTitle("Quản lý đại lý");
@@ -347,7 +347,7 @@ public final class StoragePageForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem ExitApplication;
     private javax.swing.JMenuItem Logout;
     private javax.swing.JMenuItem RecoveryKey;
-    public static javax.swing.JMenuItem UserName;
+    public static javax.swing.JMenuItem StorageAcc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;

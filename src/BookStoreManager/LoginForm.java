@@ -346,7 +346,7 @@ public class LoginForm extends javax.swing.JFrame {
                             if (gettype.equals(type) && type.equals("Quản Trị")) {
                                  AdminPageForm mf0 = new AdminPageForm();
                                 //hiện tên người dùng ở trên
-                                mf0.UserName.setText(rs0.getString(2));
+                                AdminPageForm.UserName.setText(rs0.getString(2));
                                 mf0.setVisible(true);
                                 mf0.setResizable(false);
                                 mf0.pack();
@@ -355,9 +355,9 @@ public class LoginForm extends javax.swing.JFrame {
                                 mf0.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             }
                             else if (gettype.equals(type) && type.equals("Thủ Kho")) {
-                                 StoragePageForm mf1 = new StoragePageForm();
+                                StoragePageForm mf1 = new StoragePageForm();
                                 //hiện tên người dùng ở trên
-                                mf1.UserName.setText(rs0.getString(2));
+                                StoragePageForm.StorageAcc.setText(rs0.getString(2));
                                 mf1.setVisible(true);
                                 mf1.setResizable(false);
                                 mf1.pack();
@@ -368,7 +368,7 @@ public class LoginForm extends javax.swing.JFrame {
                             else if (gettype.equals(type) && type.equals("Bán Hàng")) {
                                  SalerPageForm mf2 = new SalerPageForm();
                                 //hiện tên người dùng ở trên
-                                mf2.UserName.setText(rs0.getString(2));
+                                SalerPageForm.SalerAcc.setText(rs0.getString(2));
                                 mf2.setVisible(true);
                                 mf2.setResizable(false);
                                 mf2.pack();

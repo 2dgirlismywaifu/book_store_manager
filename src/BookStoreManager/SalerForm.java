@@ -26,14 +26,15 @@ import javax.swing.JFrame;
  */
 public class SalerForm extends javax.swing.JFrame {
     Connection con = NewConnection.getConnection();
-    PreparedStatement ps, ps1;
-    ResultSet rs, rs1;
+    PreparedStatement ps, ps1, ps2;
+    ResultSet rs, rs1, rs2;
     DefaultTableModel d;
     /**
      * Creates new form DAILYDOC
      */
     public SalerForm() {
         initComponents();
+        
         User_load();
     }
 
@@ -60,9 +61,9 @@ public class SalerForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         TelKH = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        EmployeeNameField = new javax.swing.JLabel();
+        EmployeeName = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        EmployeeNameField1 = new javax.swing.JLabel();
+        EmployeeCode = new javax.swing.JLabel();
         CreateBill = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -175,17 +176,17 @@ public class SalerForm extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("NHÂNH VIÊN BÁN HÀNG: ");
 
-        EmployeeNameField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        EmployeeNameField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EmployeeNameField.setText("Tên nhân viên");
+        EmployeeName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EmployeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EmployeeName.setText("Tên nhân viên");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("MÃ NHÂN VIÊN");
 
-        EmployeeNameField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        EmployeeNameField1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EmployeeNameField1.setText("Mã nhân viên");
+        EmployeeCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EmployeeCode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EmployeeCode.setText("Mã nhân viên");
 
         CreateBill.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         CreateBill.setText("Tạo đơn");
@@ -452,11 +453,11 @@ public class SalerForm extends javax.swing.JFrame {
                 .addGap(193, 193, 193)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmployeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmployeeNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmployeeCode, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -466,9 +467,9 @@ public class SalerForm extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EmployeeNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmployeeName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EmployeeNameField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmployeeCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,35 +584,47 @@ public class SalerForm extends javax.swing.JFrame {
         int c;
         LevelSelection.setSelectedIndex(0);
         MaSach.setSelectedIndex(0);
+        
+        String getusername = SalerPageForm.SalerAcc.getText();
         //danh sach thong tin sach
         
         try {
+            //nap ten nhan vien ma nhan vien ung voi tai khoan dang nhap
+            ps = con.prepareStatement("SELECT NHANVIEN.MaNV, NHANVIEN.TenNV "
+                    + "FROM DANGNHAP, NHANVIEN WHERE NHANVIEN.MaNV = DANGNHAP.MaNV "
+                    + "AND DANGNHAP.Username = ?");
+            ps.setString(1, getusername);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                EmployeeName.setText(rs.getString(1));
+                EmployeeCode.setText(rs.getString(2));
+            }
             
             //danh sach ma sach
-            ps = con.prepareStatement("SELECT MaSach FROM THONGTINSACH ");
-            rs1 = ps.executeQuery();
+            ps1 = con.prepareStatement("SELECT MaSach FROM THONGTINSACH ");
+            rs1 = ps1.executeQuery();
             while (rs1.next()) {
                 String type = rs1.getString("MaSach");
                 MaSach.addItem(type);
             }
             //load from CHITIETHOADON
-            ps1 = con.prepareStatement("SELECT * FROM CHITIETHOADON");
-            rs = ps1.executeQuery();
+            ps2 = con.prepareStatement("SELECT * FROM CHITIETHOADON");
+            rs2 = ps2.executeQuery();
             
-            ResultSetMetaData rad = rs.getMetaData();
+            ResultSetMetaData rad = rs2.getMetaData();
             c = rad.getColumnCount();
             
             d = (DefaultTableModel)BillInfoTable.getModel();
             d.setRowCount(0);
             
-            while (rs.next()) {
+            while (rs2.next()) {
                 Vector v2 = new Vector();
                 for (int i = 1; i <= c; i++) {
-                    v2.add(rs.getString("MaHD"));
-                    v2.add(rs.getString("MaSach"));
-                    v2.add(rs.getString("GiaTri"));
-                    v2.add(rs.getString("SoLuong"));
-                    v2.add(rs.getString("ThanhTien"));
+                    v2.add(rs2.getString("MaHD"));
+                    v2.add(rs2.getString("MaSach"));
+                    v2.add(rs2.getString("GiaTri"));
+                    v2.add(rs2.getString("SoLuong"));
+                    v2.add(rs2.getString("ThanhTien"));
                 }
                 d.addRow(v2);
             }
@@ -1043,8 +1056,8 @@ public class SalerForm extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker DateBuy;
     private org.jdesktop.swingx.JXDatePicker DateCreate;
     private javax.swing.JButton DelPackage;
-    private javax.swing.JLabel EmployeeNameField;
-    private javax.swing.JLabel EmployeeNameField1;
+    private javax.swing.JLabel EmployeeCode;
+    private javax.swing.JLabel EmployeeName;
     private javax.swing.JTextField ExcessCash;
     private javax.swing.JTextField FinalPrice;
     private javax.swing.JButton FindCustomer;

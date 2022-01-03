@@ -169,11 +169,11 @@
                   <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" pref="214" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="EmployeeNameField" min="-2" pref="172" max="-2" attributes="0"/>
+                  <Component id="EmployeeName" min="-2" pref="172" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" pref="141" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="EmployeeNameField1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="EmployeeCode" min="-2" pref="139" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -185,9 +185,9 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="EmployeeNameField" alignment="1" max="32767" attributes="0"/>
+                      <Component id="EmployeeName" alignment="1" max="32767" attributes="0"/>
                       <Component id="jLabel9" alignment="1" max="32767" attributes="0"/>
-                      <Component id="EmployeeNameField1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="EmployeeCode" alignment="1" max="32767" attributes="0"/>
                       <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -487,7 +487,7 @@
             <Property name="text" type="java.lang.String" value="NH&#xc2;NH VI&#xca;N B&#xc1;N H&#xc0;NG: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="EmployeeNameField">
+        <Component class="javax.swing.JLabel" name="EmployeeName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -505,7 +505,7 @@
             <Property name="text" type="java.lang.String" value="M&#xc3; NH&#xc2;N VI&#xca;N"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="EmployeeNameField1">
+        <Component class="javax.swing.JLabel" name="EmployeeCode">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>

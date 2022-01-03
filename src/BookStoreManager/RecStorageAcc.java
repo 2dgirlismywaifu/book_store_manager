@@ -37,7 +37,7 @@ public final class RecStorageAcc extends javax.swing.JFrame {
         text += "</html>";
         Notes.setText(text);
         RecoveryField.setEditable(false);
-        username.setText(StoragePageForm.UserName.getText());
+        username.setText(StoragePageForm.StorageAcc.getText());
         
     }
 

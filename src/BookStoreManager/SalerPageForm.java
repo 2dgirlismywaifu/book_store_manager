@@ -45,7 +45,7 @@ public final class SalerPageForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        UserName = new javax.swing.JMenuItem();
+        SalerAcc = new javax.swing.JMenuItem();
         Changpassword = new javax.swing.JMenuItem();
         RecoveryKey = new javax.swing.JMenuItem();
         Logout = new javax.swing.JMenuItem();
@@ -91,9 +91,9 @@ public final class SalerPageForm extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        UserName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8-name-16.png"))); // NOI18N
-        UserName.setText("Thông tin tài khoản");
-        jMenu1.add(UserName);
+        SalerAcc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8-name-16.png"))); // NOI18N
+        SalerAcc.setText("Thông tin tài khoản");
+        jMenu1.add(SalerAcc);
 
         Changpassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/modify-key-icon (1).png"))); // NOI18N
         Changpassword.setText("Thay đổi mật khẩu");
@@ -216,7 +216,7 @@ public final class SalerPageForm extends javax.swing.JFrame {
     private void ChangpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangpasswordActionPerformed
         // TODO add your handling code here:
         dispose();
-        ChangePassAdminAcc cp = new ChangePassAdminAcc();
+        ChangePassSalerAcc cp = new ChangePassSalerAcc();
         cp.setVisible(true);
         cp.setResizable(false);
         cp.pack();
@@ -236,7 +236,7 @@ public final class SalerPageForm extends javax.swing.JFrame {
         rk.setTitle("Khoá phục hồi");
         try {
             ps = con.prepareStatement("SELECT * FROM DANGNHAP WHERE username = ?");
-            ps.setString(1, UserName.getText());
+            ps.setString(1, SalerAcc.getText());
             rs = ps.executeQuery();
             if (rs.next()) {
                  rk.username.setText(rs.getString(2));
@@ -348,7 +348,7 @@ public final class SalerPageForm extends javax.swing.JFrame {
             public void run() {
                 
                 SalerPageForm mf = new SalerPageForm();
-                mf.UserName.setEnabled(false);
+                mf.SalerAcc.setEnabled(false);
                 mf.setVisible(true);
                 mf.setResizable(false);
                 mf.setTitle("Quản lý đại lý");
@@ -363,7 +363,7 @@ public final class SalerPageForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem ExitApplication;
     private javax.swing.JMenuItem Logout;
     private javax.swing.JMenuItem RecoveryKey;
-    public static javax.swing.JMenuItem UserName;
+    public static javax.swing.JMenuItem SalerAcc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;

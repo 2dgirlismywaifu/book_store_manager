@@ -37,7 +37,7 @@ public final class RecSalerAcc extends javax.swing.JFrame {
         text += "</html>";
         Notes.setText(text);
         RecoveryField.setEditable(false);
-        username.setText(SalerPageForm.UserName.getText());
+        username.setText(SalerPageForm.SalerAcc.getText());
         
     }
 

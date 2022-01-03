@@ -26,7 +26,7 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
      */
     public ChangePassStorageAcc() {
         initComponents();
-        usernamelabel.setText(StoragePageForm.UserName.getText());
+        StorageAccInfo.setText(StoragePageForm.StorageAcc.getText());
     }
 
     /**
@@ -50,7 +50,7 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
         ShowPassword = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         oldpassword = new javax.swing.JPasswordField();
-        usernamelabel = new javax.swing.JLabel();
+        StorageAccInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -119,9 +119,9 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
             }
         });
 
-        usernamelabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        usernamelabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        usernamelabel.setText("Tài khoản đang đăng nhập");
+        StorageAccInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        StorageAccInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StorageAccInfo.setText("Tài khoản đang đăng nhập");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,7 +149,7 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usernamelabel, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(StorageAccInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                                     .addComponent(oldpassword)
                                     .addComponent(newpassword)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -172,28 +172,28 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(usernamelabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(StorageAccInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(oldpassword))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(20, 20, 20))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(newpassword)
-                        .addGap(18, 18, 18)))
+                        .addGap(20, 20, 20)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(confirmpassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addComponent(ShowPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,7 +231,7 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
     //chức năng thay đổi mật khẩu
     private void ChangePassword_form() {
         String user, oldpass, newpass, confpass;
-        user = usernamelabel.getText();
+        user = StorageAccInfo.getText();
         oldpass = oldpassword.getText();
         newpass = newpassword.getText();
         confpass = confirmpassword.getText() ;
@@ -387,6 +387,7 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton ChangeButton;
     private javax.swing.JCheckBox ShowPassword;
+    private javax.swing.JLabel StorageAccInfo;
     private javax.swing.JPasswordField confirmpassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -396,6 +397,5 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField newpassword;
     private javax.swing.JPasswordField oldpassword;
-    private javax.swing.JLabel usernamelabel;
     // End of variables declaration//GEN-END:variables
 }
