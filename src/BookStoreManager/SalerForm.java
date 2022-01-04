@@ -132,6 +132,7 @@ public class SalerForm extends javax.swing.JFrame {
 
         MaHD.setEditable(false);
         MaHD.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        MaHD.setText("Mã ngẫu nhiên");
 
         MaKH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         MaKH.setText("Mã ngẫu nhiên");
@@ -490,11 +491,11 @@ public class SalerForm extends javax.swing.JFrame {
                     .addComponent(CreateBill)
                     .addComponent(Help))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DeleteBill)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel18)
-                        .addComponent(DateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(DateBuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DeleteBill))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()

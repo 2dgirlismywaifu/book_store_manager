@@ -7,7 +7,6 @@ package BookStoreManager;
 
 import java.sql.Connection;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -348,7 +347,7 @@ public final class SalerPageForm extends javax.swing.JFrame {
             public void run() {
                 
                 SalerPageForm mf = new SalerPageForm();
-                mf.SalerAcc.setEnabled(false);
+                SalerPageForm.SalerAcc.setEnabled(false);
                 mf.setVisible(true);
                 mf.setResizable(false);
                 mf.setTitle("Quản lý đại lý");
