@@ -6,7 +6,9 @@
 package BookStoreManager;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.SQLException;
@@ -433,10 +435,13 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ReloadButtonActionPerformed
 
     private void ConnectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionButtonActionPerformed
-        // TODO add your handling code here:       
+        // TODO add your handling code here: 
+        File file = new File("database/app.config");
         try {
-            ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "database/app.config");
-            pb.start();
+            Desktop desktop = Desktop.getDesktop();
+            desktop.open(file);
+//            ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "database/app.config");
+//            pb.start();
         } catch (IOException ex) {
             Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Tập tin không tồn tại\nLiên hệ quản trị hệ thống để hỗ trợ!","Thông báo", JOptionPane.ERROR_MESSAGE);
