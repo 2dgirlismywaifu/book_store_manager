@@ -446,8 +446,7 @@ public class BookInformation extends javax.swing.JFrame {
                     v2.add(rs.getString("TenSach"));
                     v2.add(rs.getString("TheLoai"));
                     v2.add(rs.getString("TacGia"));
-                    v2.add(rs.getString("NamXuatBan"));
-                    v2.add(rs.getString("NhaXuatBan"));
+                    v2.add(rs.getString("NamXuatBan"));                  
                     v2.add(rs.getString("NgayNhap"));
                     v2.add(rs.getString("GiaTri"));
                     v2.add(rs.getString("SoLuong"));                  
