@@ -165,6 +165,9 @@ public class BookInformation extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(BookInfoTable);
+        if (BookInfoTable.getColumnModel().getColumnCount() > 0) {
+            BookInfoTable.getColumnModel().getColumn(5).setHeaderValue("Nhà xuất bản");
+        }
 
         SaveButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         SaveButton.setText("Lưu");
@@ -446,7 +449,8 @@ public class BookInformation extends javax.swing.JFrame {
                     v2.add(rs.getString("TenSach"));
                     v2.add(rs.getString("TheLoai"));
                     v2.add(rs.getString("TacGia"));
-                    v2.add(rs.getString("NamXuatBan"));                  
+                    v2.add(rs.getString("NamXuatBan"));
+                    v2.add(rs.getString("NhaXuatBan"));
                     v2.add(rs.getString("NgayNhap"));
                     v2.add(rs.getString("GiaTri"));
                     v2.add(rs.getString("SoLuong"));                  
@@ -473,7 +477,6 @@ public class BookInformation extends javax.swing.JFrame {
         price = Price.getText();
         year = NamXB.getText();
         publishername = NhaXB.getText();
-        providename = NhaCC.getText();
         date = sdf.format(DateImport.getDate());
         amount = SoLuong.getText();
         
@@ -496,17 +499,16 @@ public class BookInformation extends javax.swing.JFrame {
             try {
                 // TODO add your handling code here:    
                 ps = con.prepareStatement("INSERT THONGTINSACH (MaSach, TenSach, TheLoai, TacGia, "
-                        + "NamXuatBan, NhaXuatBan, NhaCC, NgayNhap, GiaTri, SoLuong) VALUES (?,?,?,?,?,?,?,?,?)");
+                        + "NamXuatBan, NhaXuatBan, NgayNhap, GiaTri, SoLuong) VALUES (?,?,?,?,?,?,?,?,?)");
                 ps.setString(1,bookcode);
                 ps.setString(2,bookname);
                 ps.setString(3,type);
                 ps.setString(4,author);
                 ps.setString(5,year);
                 ps.setString(6,publishername);
-                ps.setString(7,providename);
-                ps.setString(8,date);
-                ps.setString(9, price);
-                ps.setString(10,amount);
+                ps.setString(7,date);
+                ps.setString(8, price);
+                ps.setString(9,amount);
                 ps.executeUpdate();
 
                 addNHACUNGCAP();
@@ -545,9 +547,8 @@ public class BookInformation extends javax.swing.JFrame {
         TenSach.setText(d.getValueAt(selectIndex, 1).toString());
         TheLoai.setText(d.getValueAt(selectIndex, 2).toString());
         TacGia.setText(d.getValueAt(selectIndex, 3).toString());
-        NamXB.setText(d.getValueAt(selectIndex, 4).toString());
+        NamXB.setText(d.getValueAt(selectIndex, 4).toString());        
         NhaXB.setText(d.getValueAt(selectIndex, 5).toString());
-        
         try {
             DateImport.setDate(sdf0.parse(d.getValueAt(selectIndex, 6).toString()));
         } catch (ParseException ex) {
