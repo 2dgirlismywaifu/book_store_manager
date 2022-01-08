@@ -500,6 +500,7 @@ public class EmployeeInformation extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sửa thành công","Thông báo",JOptionPane.INFORMATION_MESSAGE);
                 User_load();
                 
+                SaveButton.setEnabled(true);
                 TenNV.setText("");
                 TelEmployee.setText("");
                 Email.setText("");
@@ -516,6 +517,7 @@ public class EmployeeInformation extends javax.swing.JFrame {
     //làm mới
     private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
         User_load();
+        SaveButton.setEnabled(true);
         SearchSelection.setSelectedIndex(0);
         TenNV.setText("");               
         TelEmployee.setText("");               
@@ -539,7 +541,8 @@ public class EmployeeInformation extends javax.swing.JFrame {
             
             DeleteAccount();
             User_load();
-                                
+              
+            SaveButton.setEnabled(true);
             TenNV.setText("");               
             TelEmployee.setText("");               
             Email.setText("");                

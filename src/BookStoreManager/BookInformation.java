@@ -319,6 +319,7 @@ public class BookInformation extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -477,6 +478,7 @@ public class BookInformation extends javax.swing.JFrame {
         price = Price.getText();
         year = NamXB.getText();
         publishername = NhaXB.getText();
+        providename = NhaCC.getText();
         date = sdf.format(DateImport.getDate());
         amount = SoLuong.getText();
         
@@ -487,6 +489,7 @@ public class BookInformation extends javax.swing.JFrame {
             price.equals("") ||
             year.equals("") ||
             publishername.equals("") ||
+            providename.equals("") ||
             date.equals("") ||
             amount.equals("")) 
         {
@@ -643,10 +646,12 @@ public class BookInformation extends javax.swing.JFrame {
         int selectIndex = BookInfoTable.getSelectedRow();
         String bookcode = d.getValueAt(selectIndex, 0).toString();
         try {         
-            ps = con.prepareStatement("DELETE FROM THONGTINSACH WHERE MaSach = ?");                            
-            ps.setString(1,bookcode);          
+            ps = con.prepareStatement("DELETE FROM THONGTINSACH WHERE THONGTINSACH.MaSach = ?\n"
+                                    + "DELETE FROM NHACUNGCAP WHERE NHACUNGCAP.MaSach = ?");                            
+            ps.setString(1,bookcode);  
+            ps.setString(2,bookcode);  
             ps.executeUpdate();
-            deleteNHACUNGCAP();
+            
             JOptionPane.showMessageDialog(this,"Xoá thông tin mặt hàng thành công!","Thông tin",JOptionPane.INFORMATION_MESSAGE);       
             
             MaSach.setEditable(true);
@@ -747,7 +752,7 @@ public class BookInformation extends javax.swing.JFrame {
     private void AboutNhaCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutNhaCCActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this,"Cung cấp thông tin nhà cung cấp ở đây\n"
-                + "Trường thông tin này có thể bỏ qua nhưng sẽ không cập nhật vào bảng 'Nhà cung cấp'\n"
+                + "Trường thông tin không thể bỏ qua nếu không phần mềm sẽ không cập nhật vào bảng 'Nhà cung cấp'\n"
                 + "Có thể cập nhật lại trường này sau khi thêm hoặc sửa chữa","Thông tin", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_AboutNhaCCActionPerformed
     //thông tin nhà cung cấp
@@ -908,8 +913,9 @@ public class BookInformation extends javax.swing.JFrame {
                     ps.setString(6, date);
                     ps.setString(7,totalprice);
                     ps.executeUpdate();
-                }
-                else {
+                }               
+            }
+            else {
                     ps = con.prepareStatement("INSERT NHACUNGCAP (MaNCC, TenNCC, MaSach, SoLuong, GiaTri, NgayNhap, TongGiaTri) "
                     + "VALUES (?,?,?,?,?,?,?)");
                     ps.setString(1, publishercode);
@@ -921,7 +927,6 @@ public class BookInformation extends javax.swing.JFrame {
                     ps.setString(7,totalprice);
                     ps.executeUpdate();
                 }
-            }
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Đã xảy ra lỗi từ thông tin nhập!",
@@ -959,32 +964,31 @@ public class BookInformation extends javax.swing.JFrame {
                 String getMa = String.valueOf(rs.getString("MaNCC"));
                 Integer vaild = Integer.valueOf(rs.getString("VAILD"));
                 if (vaild >= 1) {
-                    ps = con.prepareStatement("UPDATE NHACUNGCAP SET  MaNCC = ? ,TenNCC = ? , SoLuong = ? , GiaTri = ?, NgayNhap = ?, TongGiaTri = ? "
+                    ps = con.prepareStatement("UPDATE NHACUNGCAP SET TenNCC = ? , SoLuong = ? , GiaTri = ?, NgayNhap = ?, TongGiaTri = ? "
                     + "WHERE MaNCC= ? AND MaSach = ?");
-                    ps.setString(1, getMa);
-                    ps.setString(2, providename);          
-                    ps.setString(3, amount);
-                    ps.setString(4, price);
-                    ps.setString(5, date);
-                    ps.setString(6,totalprice);
-                    ps.setString(7, getMa);
-                    ps.setString(8, bookcode);
+                    
+                    ps.setString(1, providename);          
+                    ps.setString(2, amount);
+                    ps.setString(3, price);
+                    ps.setString(4, date);
+                    ps.setString(5,totalprice);
+                    ps.setString(6, getMa);
+                    ps.setString(7, bookcode);
                     ps.executeUpdate();
-                }
-                else { //Thay TenNCC nhung TenNCC khong ton tai trong csdl
+                }              
+            }
+            else { //Thay TenNCC nhung TenNCC khong ton tai trong csdl
                     ps = con.prepareStatement("UPDATE NHACUNGCAP SET  MaNCC = ? ,TenNCC = ? , SoLuong = ? , GiaTri = ?, NgayNhap = ?, TongGiaTri = ? "
-                    + "WHERE MaNCC= ? AND MaSach = ?");
+                    + "WHERE MaSach = ?");
                     ps.setString(1, publishercode);
                     ps.setString(2, providename);          
                     ps.setString(3, amount);
                     ps.setString(4, price);
                     ps.setString(5, date);
-                    ps.setString(6,totalprice);
-                    ps.setString(7, publishercode);
-                    ps.setString(8, bookcode);
+                    ps.setString(6,totalprice);                  
+                    ps.setString(7, bookcode);
                     ps.executeUpdate();
                 }
-            }
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Đã xảy ra lỗi từ thông tin nhập!",
@@ -992,29 +996,8 @@ public class BookInformation extends javax.swing.JFrame {
             Logger.getLogger(BookInformation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //chú ý: phần này không hề xoá nhà cung cấp, chỉ xoá tên sách trong nhà cung cấp
-    private void deleteNHACUNGCAP() {
-        d = (DefaultTableModel)BookInfoTable.getModel();
-        int selectIndex = BookInfoTable.getSelectedRow();
-        String bookcode = d.getValueAt(selectIndex, 0).toString();
-        String providename = NhaCC.getText();
-        try {         
-            
-            ps0 = con.prepareStatement("SELECT MaNCC FROM NHACUNGCAP WHERE TenNCC = ? ");
-            ps0.setString(1, providename);
-            rs = ps0.executeQuery();
-            if (rs.next()) {
-                String getMa = String.valueOf(rs.getString("MaNCC"));
-                ps = con.prepareStatement("DELETE FROM NHACUNGCAP WHERE MaNCC= ? AND MaSach = ?");
-                ps.setString(1,getMa);
-                ps.setString(2,bookcode);           
-                ps.executeUpdate();
-            }
-                      
-            } catch (SQLException ex) {
-                Logger.getLogger(BookInformation.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

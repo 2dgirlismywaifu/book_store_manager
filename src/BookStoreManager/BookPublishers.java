@@ -140,7 +140,7 @@ public class BookPublishers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã NCC", "Tên NCC", "Mã sách", "SĐT", "Số lượng", "Giá trị", "Ngày nhập", "Tổng giá trị"
+                "Mã NCC", "Tên NCC", "Mã sách", "Số lượng", "Giá trị", "Ngày nhập", "Tổng giá trị", "SĐT"
             }
         ));
         BookPublisherTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -398,12 +398,12 @@ public class BookPublishers extends javax.swing.JFrame {
                 for (int i = 1; i <= c; i++) {
                     v2.add(rs.getString("MaNCC"));
                     v2.add(rs.getString("TenNCC"));
-                    v2.add(rs.getString("MaSach"));
-                    v2.add(rs.getString("SDT"));
+                    v2.add(rs.getString("MaSach"));                  
                     v2.add(rs.getString("SoLuong"));
                     v2.add(rs.getString("GiaTri"));
                     v2.add(rs.getString("NgayNhap"));                   
                     v2.add(rs.getString("TongGiaTri"));
+                    v2.add(rs.getString("SDT"));
                     
                 }
                 d.addRow(v2);
@@ -423,17 +423,17 @@ public class BookPublishers extends javax.swing.JFrame {
         int selectIndex = BookPublisherTable.getSelectedRow();        
         MaNCC.setText(d.getValueAt(selectIndex, 0).toString());
         TenNCC.setText(d.getValueAt(selectIndex, 1).toString());
-        MaSach.setText(d.getValueAt(selectIndex, 2).toString());
-        Telephone.setText(d.getValueAt(selectIndex, 3).toString());
-        SoLuong.setText(d.getValueAt(selectIndex, 4).toString());
-        Price.setText(d.getValueAt(selectIndex, 5).toString());
+        MaSach.setText(d.getValueAt(selectIndex, 2).toString());       
+        SoLuong.setText(d.getValueAt(selectIndex, 3).toString());
+        Price.setText(d.getValueAt(selectIndex, 4).toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");       
         try {
-            DateImport.setDate(sdf.parse(d.getValueAt(selectIndex, 6).toString()));
+            DateImport.setDate(sdf.parse(d.getValueAt(selectIndex, 5).toString()));
         } catch (ParseException ex) {
             Logger.getLogger(BookInformation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        FinalPrice.setText(d.getValueAt(selectIndex, 7).toString());
+        FinalPrice.setText(d.getValueAt(selectIndex, 6).toString());
+        Telephone.setText(d.getValueAt(selectIndex, 7).toString());
         
         MaNCC.setEditable(false);
         TenNCC.setEditable(false);

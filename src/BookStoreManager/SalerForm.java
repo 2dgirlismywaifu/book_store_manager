@@ -606,8 +606,8 @@ public class SalerForm extends javax.swing.JFrame {
             ps.setString(1, getusername);
             rs = ps.executeQuery();
             while (rs.next()) {
-                EmployeeName.setText(rs.getString(1));
-                EmployeeCode.setText(rs.getString(2));
+                EmployeeCode.setText(rs.getString(1));
+                EmployeeName.setText(rs.getString(2));
             }
             
             //danh sach ma sach
@@ -687,7 +687,7 @@ public class SalerForm extends javax.swing.JFrame {
         }
         else {
             try {
-                ps = con.prepareStatement("INSERT HOADON(MaHD, MaNV, NgayMua) VALUES (?,?,?)");
+                ps = con.prepareStatement("INSERT INTO HOADON(MaHD, MaNV, NgayMua) VALUES (?,?,?)");
                 ps.setString(1, billcode);
                 ps.setString(2, emplcode);
                 ps.setString(3, date);
@@ -931,7 +931,7 @@ public class SalerForm extends javax.swing.JFrame {
             ps.setString(1, billcode);
             ps.executeUpdate();
             MaHD.setText("");
-            
+            DisableFunction();
             
             JOptionPane.showMessageDialog(this,"Đã xoá đơn vừa tạo","Thông tin",JOptionPane.INFORMATION_MESSAGE);
             
@@ -962,6 +962,31 @@ public class SalerForm extends javax.swing.JFrame {
         DelPackage.setEnabled(true);
         AddPackage.setEnabled(true);
         PaymentButton.setEnabled(true);
+        ///////////////////////////////
+    }
+    
+    public void DisableFunction() {
+        //Disable field input
+        MaKH.setEnabled(false);
+        TenKH.setEnabled(false);
+        TelKH.setEnabled(false);
+        LevelSelection.setEnabled(false);
+        DateCreate.setEnabled(false);
+        MaSach.setEnabled(false);
+        TenSach.setEnabled(false);
+        GiaTri.setEnabled(false);
+        SoLuong.setEnabled(false);
+        TotalPrice.setEnabled(false);
+        FinalPrice.setEnabled(false);
+        CustomerPay.setEnabled(false);
+        ExcessCash.setEnabled(false);
+        /////////////////////////////
+        //Disable button
+        AddCustomer.setEnabled(false);
+        FindCustomer.setEnabled(false);
+        DelPackage.setEnabled(false);
+        AddPackage.setEnabled(false);
+        PaymentButton.setEnabled(false);
         ///////////////////////////////
     }
     

@@ -84,6 +84,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
         ClearPassField = new javax.swing.JButton();
         ShowPassword = new javax.swing.JCheckBox();
         password = new javax.swing.JPasswordField();
+        EmployeeInformation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -243,6 +244,14 @@ public class GrantAccountForm extends javax.swing.JFrame {
 
         password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        EmployeeInformation.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        EmployeeInformation.setText("Thông tin");
+        EmployeeInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmployeeInformationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -297,6 +306,8 @@ public class GrantAccountForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(EmployeeInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -324,7 +335,8 @@ public class GrantAccountForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
-                                .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(MaNVList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(EmployeeInformation))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -745,6 +757,34 @@ public class GrantAccountForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         password.setText("");
     }//GEN-LAST:event_ClearPassFieldActionPerformed
+    //hiện thông tin về nhân viên
+    private void EmployeeInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeInformationActionPerformed
+        // TODO add your handling code here:
+        String employeecode, name, tel, addr,job;
+        employeecode = MaNVList.getSelectedItem().toString();
+        
+        try {
+            ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE MaNV = ?");
+            ps.setString(1, employeecode);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                name = String.valueOf(rs.getString("TenNV"));
+                tel = String.valueOf(rs.getString("Tel"));
+                addr = String.valueOf(rs.getString("Address"));
+                job = String.valueOf(rs.getString("Job"));
+                JOptionPane.showMessageDialog(this, "Thông tin nhân viên\n"
+                                            + "Tên nhân viên: " + name +"\n"
+                                            + "Số điện thoại: " + tel +"\n"
+                                            + "Địa chỉ: " + addr +"\n"
+                                            + "Công việc: " + job +"\n",
+                            "Thông báo",JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GrantAccountForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+    }//GEN-LAST:event_EmployeeInformationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -797,6 +837,7 @@ public class GrantAccountForm extends javax.swing.JFrame {
     private javax.swing.JButton ClearPassField;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
+    private javax.swing.JButton EmployeeInformation;
     private javax.swing.JButton ExcelExport;
     private javax.swing.JButton ExitButton;
     private javax.swing.JButton Help;
