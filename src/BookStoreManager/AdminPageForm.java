@@ -312,8 +312,7 @@ public final class AdminPageForm extends javax.swing.JFrame {
                                               
   //thay đổi mật khẩu
     private void ChangpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangpasswordActionPerformed
-        // TODO add your handling code here:
-        dispose();
+        // TODO add your handling code here:       
         ChangePassAdminAcc cp = new ChangePassAdminAcc();
         cp.setVisible(true);
         cp.setResizable(false);

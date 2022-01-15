@@ -7,7 +7,6 @@ package BookStoreManager;
 
 import java.sql.Connection;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -215,7 +214,6 @@ public final class StoragePageForm extends javax.swing.JFrame {
   //thay đổi mật khẩu
     private void ChangpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangpasswordActionPerformed
         // TODO add your handling code here:
-        dispose();
         ChangePassStorageAcc cp = new ChangePassStorageAcc();
         cp.setVisible(true);
         cp.setResizable(false);
