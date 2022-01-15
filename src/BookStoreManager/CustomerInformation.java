@@ -133,9 +133,17 @@ public class CustomerInformation extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã khách hàng", "Họ và tên", "Điện thoại", "Thứ hạng", "Ngày lập thẻ", "Số lượng sách đã mua", "Tổng giá trị"
+                "Mã khách hàng", "Họ và tên", "Điện thoại", "Thứ hạng", "Ngày lập thẻ", "Tổng giá trị"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         CustomerInfoTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CustomerInfoTableMouseClicked(evt);
@@ -345,7 +353,6 @@ public class CustomerInformation extends javax.swing.JFrame {
                     v2.add(rs.getString("SDT"));
                     v2.add(rs.getString("ThuHang"));
                     v2.add(rs.getString("NgayLapThe"));
-                    v2.add(rs.getString("SoLuongSachDaMua"));
                     v2.add(rs.getString("TongGiaTri"));                   
                 }
                 d.addRow(v2);
@@ -373,15 +380,14 @@ public class CustomerInformation extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(CustomerInformation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SoLuong.setText(d.getValueAt(selectIndex, 5).toString());
-        TotalPrice.setText(d.getValueAt(selectIndex, 6).toString());
+        
+        TotalPrice.setText(d.getValueAt(selectIndex, 5).toString());
         
         MaKH.setEditable(false);
         TenKH.setEditable(false);
         TelCustomer.setEditable(false);
         CustomerLevel.setEditable(false);
         DateImport.setEditable(false);
-        SoLuong.setEditable(false);
         TotalPrice.setEditable(false);
     }//GEN-LAST:event_CustomerInfoTableMouseClicked
 

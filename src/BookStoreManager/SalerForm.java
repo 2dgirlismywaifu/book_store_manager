@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSetMetaData;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.Vector;
@@ -591,7 +592,7 @@ public class SalerForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     //Load bảng từ SQL Server
     public void User_load() {
-        int c;
+        
         LevelSelection.setSelectedIndex(0);
         MaSach.setSelectedIndex(0);
         
@@ -617,8 +618,19 @@ public class SalerForm extends javax.swing.JFrame {
                 String type = rs1.getString("MaSach");
                 MaSach.addItem(type);
             }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                                                                                                      
+    }
+    
+    public void loadBillInfo() {
+        int c;
+        try {
             //load from CHITIETHOADON
-            ps2 = con.prepareStatement("SELECT * FROM CHITIETHOADON");
+            ps2 = con.prepareStatement("SELECT * FROM CHITIETHOADON WHERE MaHD = ?");
+            ps2.setString(1, MaHD.getText());
             rs2 = ps2.executeQuery();
             
             ResultSetMetaData rad = rs2.getMetaData();
@@ -642,7 +654,7 @@ public class SalerForm extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-                                                                                                      
+            
     }
     
      //thao tac tren bang  
@@ -680,7 +692,7 @@ public class SalerForm extends javax.swing.JFrame {
         String emplcode = EmployeeCode.getText();
         String date = sdf.format(DateBuy.getDate());
         MaHD.setText(billcode);
-        
+        loadBillInfo();
         if(date.equals("")) {
             JOptionPane.showMessageDialog(this, "Nhập ngày mua",
                             "Thông báo",JOptionPane.ERROR_MESSAGE);
@@ -726,14 +738,15 @@ public class SalerForm extends javax.swing.JFrame {
         tel = TelKH.getText();
         level = LevelSelection.getSelectedItem().toString();
         date = sdf.format(DateCreate.getDate());
+        MaKH.setText(makh);
         
         if (name.equals("") || tel.equals("") || level.equals("Chọn thứ hạng") || date.equals("")) {
-            JOptionPane.showMessageDialog(null, "Trường thông tin còn trống",
+            JOptionPane.showMessageDialog(this, "Trường thông tin còn trống",
                             "Thông báo",JOptionPane.ERROR_MESSAGE);        
         }
         else {
             try {                
-                ps1 = con.prepareStatement("SELECT MaKH, HoTenKH, SDT, COUNT(SDT) AS VAIL "
+                ps1 = con.prepareStatement("SELECT SDT, COUNT(SDT) AS VAIL "
                         + "FROM KHACHHANG WHERE SDT = ? GROUP BY SDT");
                 ps1.setString(1, tel);
                 rs = ps1.executeQuery();
@@ -742,8 +755,9 @@ public class SalerForm extends javax.swing.JFrame {
                     if (vaild >= 1) {
                         JOptionPane.showMessageDialog(null, "Số điện thoại đã tồn tại",
                             "Thông báo",JOptionPane.ERROR_MESSAGE);
-                    } 
-                    else {
+                    }                    
+                }
+                else {
                        //Thêm khách hàng vào hệ thống
                        ps = con.prepareStatement("INSERT KHACHHANG(MaKH, HoTenKH, SDT, ThuHang, NgayLapThe) VALUES (?,?,?,?,?)");
                        ps.setString(1, makh); 
@@ -760,12 +774,9 @@ public class SalerForm extends javax.swing.JFrame {
                         ps1.setString(2, billcode);
                         ps1.executeUpdate();
                        
-                       MaKH.setText("");
-                       TenKH.setText("");
-                       TelKH.setText("");
-                       LevelSelection.setSelectedIndex(0);
+                      
                     }
-                }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -780,8 +791,10 @@ public class SalerForm extends javax.swing.JFrame {
         bookcode = MaSach.getSelectedItem().toString();
         price = GiaTri.getText();
         amount = SoLuong.getText();
-        totalprice = TotalPrice.getText();
-              
+        totalprice = String.valueOf(Integer.valueOf(price) * Integer.valueOf(amount));
+         
+        TotalPrice.setText(totalprice);
+        
             try {
                 ps = con.prepareStatement("INSERT CHITIETHOADON(MaHD, MaSach, GiaTri, SoLuong, ThanhTien)"
                         + "VALUES (?,?,?,?,?)");
@@ -792,7 +805,8 @@ public class SalerForm extends javax.swing.JFrame {
                 ps.setString(5, totalprice);
                 ps.executeUpdate();
                 
-                //cập nhật số lượng sách trong kho
+                loadBillInfo();
+                //cập nhật số lượng sách trong kho               
                 updateBookAmount();
                 FinalPrice();
                 int asking0 = JOptionPane.showConfirmDialog(null, "Thêm mặt hàng thành công\n Xoá thông tin các trường hiện tại?",
@@ -840,6 +854,7 @@ public class SalerForm extends javax.swing.JFrame {
         int sl = Integer.parseInt(soluong);
         int selprice  = Integer.parseInt(price);
         int getTotal = sl * selprice;
+        TotalPrice.setText(String.valueOf(getTotal));
         FinalPrice.setText(String.valueOf(getTotal));
     }//GEN-LAST:event_SoLuongKeyReleased
     //xoa mat hang vua them
@@ -855,6 +870,7 @@ public class SalerForm extends javax.swing.JFrame {
             ps.setString(1, billcode);
             ps.setString(2, bookcode);
             ps.executeUpdate();
+            loadBillInfo();
             delBookAmount();
             FinalPrice();
             int asking0 = JOptionPane.showConfirmDialog(null, "Xoá mặt hàng thành công\n Xoá thông tin các trường hiện tại?",
@@ -875,6 +891,7 @@ public class SalerForm extends javax.swing.JFrame {
     //thanh toan hoa don
     private void PaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentButtonActionPerformed
         // TODO add your handling code here:
+        String makh = MaKH.getText();
         String billcode = MaHD.getText();
         String finalprice = FinalPrice.getText();
         String custpay = CustomerPay.getText();
@@ -883,12 +900,14 @@ public class SalerForm extends javax.swing.JFrame {
         ExcessCash.setText(String.valueOf(concustpay - confinalprice));
         String excash = ExcessCash.getText();
         JOptionPane.showMessageDialog(this,"Trả lại khách: " + excash +" VNĐ","Thông tin",JOptionPane.INFORMATION_MESSAGE);
-        
+        //cap nhat tong so tien KH da mua
+        updateBill();      
         //tiếp theo sẽ cập nhật thành tiền tổng hoá đơn
         try {
-            ps = con.prepareStatement("UPDATE HOADON SET ThanhTien = ? WHERE MaHD = ? ");
+            ps = con.prepareStatement("UPDATE HOADON SET ThanhTien = ?, MaKH = ? WHERE MaHD = ? ");
             ps.setString(1, finalprice);
-            ps.setString(2, billcode);
+            ps.setString(2, makh);
+            ps.setString(3, billcode);
             ps.executeUpdate();
             
         } catch (SQLException ex) {
@@ -903,23 +922,47 @@ public class SalerForm extends javax.swing.JFrame {
         String name = TenKH.getText();
         String tel = TelKH.getText();
         
-        try {
-            ps = con.prepareStatement("SELECT COUNT(*) AS VAILD FROM KHACHANG WHERE HoTenKH = ? AND SDT = ?");
-            ps.setString(1, name);
-            ps.setString(2, tel);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Integer vaild = Integer.valueOf(rs.getString("VAILD"));
-                if (vaild == 1) {
-                    JOptionPane.showMessageDialog(this,"Khách hàng đã có thông ti trong hệ thống","Thông tin",JOptionPane.INFORMATION_MESSAGE);
-                    AddCustomer.setEnabled(false);
+        if (name.equals("") || tel.equals("")) {
+            JOptionPane.showMessageDialog(this,"Nhập tên khách hàng và số điện thoại","Thông tin",JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            try {
+                ps = con.prepareStatement("SELECT COUNT(*) AS VAILD FROM KHACHHANG WHERE HoTenKH = ? AND SDT = ?");
+                ps.setString(1, name);
+                ps.setString(2, tel);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    Integer vaild = Integer.valueOf(rs.getString("VAILD"));
+                    if (vaild == 1) {
+                        JOptionPane.showMessageDialog(this,"Khách hàng đã có thông tin trong hệ thống","Thông tin",JOptionPane.INFORMATION_MESSAGE);
+                        ps1 = con.prepareStatement("SELECT MaKH, ThuHang, NgayLapThe FROM KHACHHANG WHERE HoTenKH = ? AND SDT = ?");
+                        ps1.setString(1, name);
+                        ps1.setString(2, tel);
+                        rs1 = ps1.executeQuery();
+                        if (rs1.next()) {
+                            MaKH.setText(rs1.getString("MaKH"));
+                        LevelSelection.setSelectedItem(rs1.getString("ThuHang"));
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    
+                        try {
+                            DateCreate.setDate(sdf.parse(rs1.getString("NgayLapThe")));
+                        } catch (ParseException ex) {
+                            Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        }
+
+                         AddCustomer.setEnabled(false);
+                    }
+                    else if (vaild == 0) {
+                        JOptionPane.showMessageDialog(this,"Đây là khách hàng mới","Thông tin",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-                else if (vaild == 0) {
-                    JOptionPane.showMessageDialog(this,"Đây là khách hàng mới","Thông tin",JOptionPane.INFORMATION_MESSAGE);
-                }
+                else {
+                        JOptionPane.showMessageDialog(this,"Đây là khách hàng mới","Thông tin",JOptionPane.INFORMATION_MESSAGE);
+                    }
+            } catch (SQLException ex) {
+                Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_FindCustomerActionPerformed
     //xoá đơn nếu tạo nhầm do lỗi nhân viên
@@ -927,8 +970,10 @@ public class SalerForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String billcode = MaHD.getText();
          try {
-            ps = con.prepareStatement("DELETE FROM HOADON WHERE MaHD = ? ");
+            ps = con.prepareStatement("DELETE FROM HOADON WHERE MaHD = ?\n"
+                    + "DELETE FROM CHITIETHOADON WHERE MaHD = ?");
             ps.setString(1, billcode);
+            ps.setString(2, billcode);
             ps.executeUpdate();
             MaHD.setText("");
             DisableFunction();
@@ -1007,19 +1052,36 @@ public class SalerForm extends javax.swing.JFrame {
     }
     
     public void FinalPrice() {
-        for(int i = 0; i < BillInfoTable.getRowCount(); i++){
-            int total = 0;
-            int Amount = Integer.parseInt(BillInfoTable.getValueAt(i, 4)+"");
-            total = Amount+total;
-            FinalPrice.setText(String.valueOf(total));
-        }         
+        int sum = 0;
+        for (int i = 0; i < BillInfoTable.getRowCount(); i++) {
+           sum = sum + Integer.parseInt(BillInfoTable.getValueAt(i, 4).toString());
+        }
+        String total = Integer.toString(sum);
+        FinalPrice.setText(total);
+    }
+    //cập nhật tổng số tiền khách đã thanh toán tất cả các hoá đơn (bang HOADON
+    public void updateBill() {
+        String makh = MaKH.getText();
+        try {
+            ps = con.prepareStatement("SELECT SUM(CAST(ThanhTien as int)) AS TOTAL FROM HOADON WHERE MaKH = ?");
+            ps.setString(1, makh);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String total = rs.getString("TOTAL");
+                ps1 = con.prepareStatement("UPDATE KHACHHANG SET TongGiaTri = ? WHERE MaKH = ?");
+                ps1.setString(1, total);
+                ps1.setString(2, makh);
+                ps1.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     // tự động cập nhật số lượng còn lại sau khi thêm mặt hàng vào hoá đơn
     public void updateBookAmount() {
         String bookcode = MaSach.getSelectedItem().toString();
         try {
-            ps = con.prepareStatement("SELECT SoLuong FROM THONGTINSACH WHERE MaSach = ?");
-            ps1 = con.prepareStatement("UPDATE THONGTINSACH SET SoLuong = ? WHERE MaSach = ?");
+            ps = con.prepareStatement("SELECT SoLuong FROM THONGTINSACH WHERE MaSach = ?");          
             ps.setString(1, bookcode);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -1027,8 +1089,10 @@ public class SalerForm extends javax.swing.JFrame {
                 Integer inputAmount = Integer.valueOf(SoLuong.getText());
                 String updateAmount = String.valueOf(getAmount - inputAmount);
                 
+                ps1 = con.prepareStatement("UPDATE THONGTINSACH SET SoLuong = ? WHERE MaSach = ?");
                 ps1.setString(1, updateAmount);
                 ps1.setString(2, bookcode);
+                ps1.executeUpdate();
                 
             }
         } catch (SQLException ex) {
@@ -1041,7 +1105,7 @@ public class SalerForm extends javax.swing.JFrame {
         String bookcode = MaSach.getSelectedItem().toString();
         try {
             ps = con.prepareStatement("SELECT SoLuong FROM THONGTINSACH WHERE MaSach = ?");
-            ps1 = con.prepareStatement("UPDATE THONGTINSACH SET SoLuong = ? WHERE MaSach = ?");
+            
             ps.setString(1, bookcode);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -1049,9 +1113,10 @@ public class SalerForm extends javax.swing.JFrame {
                 Integer inputAmount = Integer.valueOf(SoLuong.getText());
                 String updateAmount = String.valueOf(getAmount + inputAmount);
                 
+                ps1 = con.prepareStatement("UPDATE THONGTINSACH SET SoLuong = ? WHERE MaSach = ?");
                 ps1.setString(1, updateAmount);
                 ps1.setString(2, bookcode);
-                
+                ps1.executeUpdate();
             }
         } catch (SQLException ex) {
             Logger.getLogger(SalerForm.class.getName()).log(Level.SEVERE, null, ex);
