@@ -222,7 +222,7 @@ public class ChangePassStorageAcc extends javax.swing.JFrame {
         int asking0 = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn thoát?","Thay dổi mật khẩu",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
         if (asking0 == JOptionPane.YES_OPTION ) {
             this.dispose();
-            new AdminPageForm().setVisible(true);
+           
             
         } else if (asking0 == JOptionPane.NO_OPTION){
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
