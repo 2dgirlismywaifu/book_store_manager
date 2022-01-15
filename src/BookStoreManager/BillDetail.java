@@ -438,11 +438,11 @@ public class BillDetail extends javax.swing.JFrame {
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 1; i <= c; i++) {
-                    v2.add(rs.getString("CHITIETHOADON.MaSach"));
-                    v2.add(rs.getString("THONGTINSACH.TenSach"));
-                    v2.add(rs.getString("THONGTINSACH.GiaTri"));
-                    v2.add(rs.getString("CHITIETHOADON.SoLuong"));
-                    v2.add(rs.getString("CHITIETHOADON.ThanhTien"));
+                    v2.add(rs.getString(1));
+                    v2.add(rs.getString(2));
+                    v2.add(rs.getString(3));
+                    v2.add(rs.getString(4));
+                    v2.add(rs.getString(5));
                 }
                 d.addRow(v2);
             }

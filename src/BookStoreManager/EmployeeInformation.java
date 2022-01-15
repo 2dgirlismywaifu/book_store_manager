@@ -589,13 +589,13 @@ public class EmployeeInformation extends javax.swing.JFrame {
                     ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE Address = ?");
                     ps.setString(1,search);
                     rs=ps.executeQuery();
-                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs2));
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
                 }
                 case "Chức vụ" -> {
                     ps = con.prepareStatement("SELECT * FROM NHANVIEN WHERE Job = ?");
                     ps.setString(1,search);
                     rs=ps.executeQuery();
-                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs2));
+                    EmployeeInformation.setModel(DbUtils.resultSetToTableModel(rs));
                 }
                 default -> JOptionPane.showMessageDialog(this,"Chưa chọn loại tìm kiếm","Tìm kiếm", JOptionPane.ERROR_MESSAGE);
             }

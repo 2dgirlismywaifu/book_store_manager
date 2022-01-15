@@ -335,13 +335,18 @@ public class LoginForm extends javax.swing.JFrame {
                 rs0 = ps0.executeQuery();
                 if (rs0.next()) {
                     String getpassword = String.valueOf(rs0.getString("password"));
-                     if (BCrypt.checkpw( PasswordField1.getText(), getpassword)) {                       
+                    String gettype = rs0.getString(4);
+                    if (!gettype.equals(type)) {
+                        JOptionPane.showMessageDialog(null,"Phát hiện hành động xâm nhập\nThoát chương trình khẩn cấp",
+                                   "Đăng Nhập",JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
+                    if (BCrypt.checkpw( PasswordField1.getText(), getpassword)) {                       
                          JOptionPane.showMessageDialog(null,"Giải mã thành công!\nThực hiện đăng nhập",
                                 "Đăng Nhập",JOptionPane.INFORMATION_MESSAGE);   
                          this.dispose();
                             
-                        //now check level account
-                            String gettype = rs0.getString(4);
+                        //now check level account                           
                             if (gettype.equals(type) && type.equals("Quản Trị")) {
                                  AdminPageForm mf0 = new AdminPageForm();
                                 //hiện tên người dùng ở trên
@@ -375,13 +380,12 @@ public class LoginForm extends javax.swing.JFrame {
                                 mf2.setTitle("Nhân viên bán hàng");
                                 mf2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             }
-                           
-                        
-                     } else {
-                         JOptionPane.showMessageDialog(null,"Sai tài khoản hoặc mật khẩu",
-                                "Đăng Nhập",JOptionPane.ERROR_MESSAGE);
-                            userfield.setText("");
-                            PasswordField1.setText("");
+                    
+                        } else {
+                            JOptionPane.showMessageDialog(null,"Sai tài khoản hoặc mật khẩu",
+                                   "Đăng Nhập",JOptionPane.ERROR_MESSAGE);
+                               userfield.setText("");
+                               PasswordField1.setText("");
                      }
                 }
             } catch (SQLException ex) {

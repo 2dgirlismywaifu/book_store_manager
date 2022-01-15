@@ -329,10 +329,10 @@ public class BillHistory extends javax.swing.JFrame {
         //danh sach thong tin sach
         
         try {
-            ps1 = con.prepareStatement("SELECT MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, "
+            ps1 = con.prepareStatement("SELECT HOADON.MaHD, KHACHHANG.MaKH, KHACHHANG.HoTenKH, NHANVIEN.MaNV, "
                                        + "NHANVIEN.TenNV, NgayMua, ThanhTien\n" +
                                        "FROM HOADON, KHACHHANG, NHANVIEN\n" +
-                                       "WHERE HOADON.MaKH = HOADON.MaKH AND HOADON.MaNV = NHANVIEN.MaNV");
+                                       "WHERE HOADON.MaKH = KHACHHANG.MaKH AND HOADON.MaNV = NHANVIEN.MaNV");
             rs = ps1.executeQuery();
             
             ResultSetMetaData rad = rs.getMetaData();
@@ -344,13 +344,13 @@ public class BillHistory extends javax.swing.JFrame {
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 1; i <= c; i++) {
-                    v2.add(rs.getString("MaHD"));
-                    v2.add(rs.getString("KHACHHANG.MaKH"));
-                    v2.add(rs.getString("KHACHHANG.HoTenKH"));
-                    v2.add(rs.getString("NHANVIEN.MaNV"));
-                    v2.add(rs.getString("NHANVIEN.TenNV"));
-                    v2.add(rs.getString("NgayMua"));
-                    v2.add(rs.getString("ThanhTien"));
+                    v2.add(rs.getString(1));
+                    v2.add(rs.getString(2));
+                    v2.add(rs.getString(3));
+                    v2.add(rs.getString(4));
+                    v2.add(rs.getString(5));
+                    v2.add(rs.getString(6));
+                    v2.add(rs.getString(7));
                 }
                 d.addRow(v2);
             }
