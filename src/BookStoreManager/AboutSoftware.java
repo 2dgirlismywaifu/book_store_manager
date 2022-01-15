@@ -46,7 +46,7 @@ public class AboutSoftware extends javax.swing.JFrame {
         text += "4. Trịnh Tiến Anh<br>";
         text += "5. Vũ Quốc Hưng<br>";
         text += "==============================<br>";
-        text += "Nhà bán kem đánh răng, không bán gói mè<br>";
+        text += "Nhà bán sách, không bán gói mè<br>";
         
         
         information.setText(text);
