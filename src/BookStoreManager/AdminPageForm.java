@@ -157,7 +157,7 @@ public final class AdminPageForm extends javax.swing.JFrame {
         BookInformationMenu.add(BookInformation);
 
         BookPublisher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8-create-document-16.png"))); // NOI18N
-        BookPublisher.setText("Nhà xuất bản");
+        BookPublisher.setText("Nhà cung cấp");
         BookPublisher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BookPublisherActionPerformed(evt);
@@ -423,7 +423,7 @@ public final class AdminPageForm extends javax.swing.JFrame {
         bookpush.setResizable(false);
         bookpush.pack();
         bookpush.setLocationRelativeTo(null);
-        bookpush.setTitle("THÔNG TIN NHÀ XUẤT BẢN");
+        bookpush.setTitle("THÔNG TIN NHÀ CUNG CẤP");
     }//GEN-LAST:event_BookPublisherActionPerformed
     //Thông tin nhân viên
     private void EmployeeInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeInformationActionPerformed

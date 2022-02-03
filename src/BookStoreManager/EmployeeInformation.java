@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSetMetaData;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.Vector;
